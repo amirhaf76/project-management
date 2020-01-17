@@ -4,22 +4,24 @@ import java.util.Objects;
 
 public class User {
 
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private String phoneNumber;
 
     private final ArrayList<Project> projects = new ArrayList<Project>();
 
-    public User(String userName, String password, String email, String phoneNumber) {
-        this.userName = userName;
+    public User(String username, String password, String email, String phoneNumber) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUserName() {
-        return userName;
+
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -34,16 +36,8 @@ public class User {
         return phoneNumber;
     }
 
-    public Iterator getJoinedProjects() {
-        return projects.iterator();
-    }
-
-    public boolean addNewProject(Project newProject) {
-        return projects.add(newProject);
-    }
-
-    public boolean removeProject(Project project) {
-        return projects.remove(project);
+    public ArrayList<Project> getProjects() {
+        return projects;
     }
 
     @Override
@@ -51,17 +45,17 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userName.equals(user.userName);
+        return username.equals(user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName);
+        return Objects.hash(username);
     }
 
     @Override
     public String toString() {
-        return "userName: " + userName + '\n' +
+        return "username: " + username + '\n' +
                 "email: " + email + '\n' +
                 "phoneNumber='" + phoneNumber
                 ;

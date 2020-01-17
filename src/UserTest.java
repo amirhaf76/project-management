@@ -1,52 +1,59 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
+    private String username = "user#1";
+    private String email = "user_1@email.com";
+    private String password = "password#1";
+    private String phoneNumber = "###-1";
 
-    @BeforeEach
-    void setUp() {
-    }
-
+    private User user = new User(username, password, email, phoneNumber);
     @Test
-    void getUserName() {
+    void getUsername() {
+        assertEquals(username, user.getUsername());
     }
 
     @Test
     void getPassword() {
+        assertEquals(password, user.getPassword());
     }
 
     @Test
     void getEmail() {
+        assertEquals(email, user.getEmail());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getPhoneNumber() {
+        assertEquals(phoneNumber, user.getPhoneNumber());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getJoinedProjects() {
+
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void addNewProject() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void removeProject() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void equals() {
     }
 
-//    @org.junit.jupiter.api.Test
+//    @Test
 //    void hashCode() {
 //    }
 //
-//    @org.junit.jupiter.api.Test
+//    @Test
 //    void toString() {
 //    }
 }
