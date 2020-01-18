@@ -1,7 +1,10 @@
+package Model;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +15,7 @@ class UserTest {
     private String phoneNumber = "###-1";
 
     private User user = new User(username, password, email, phoneNumber);
+    private ArrayList<Project> projects = new ArrayList<>();
     @Test
     void getUsername() {
         assertEquals(username, user.getUsername());
@@ -38,22 +42,6 @@ class UserTest {
     }
 
     @Test
-    void addNewProject() {
-    }
-
-    @Test
-    void removeProject() {
-    }
-
-    @Test
     void equals() {
     }
-
-//    @Test
-//    void hashCode() {
-//    }
-//
-//    @Test
-//    void toString() {
-//    }
 }

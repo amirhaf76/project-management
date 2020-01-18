@@ -1,29 +1,43 @@
-import java.time.LocalDate;
+package Model;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.function.LongConsumer;
+import java.util.Objects;
 
 public class Task {
-    private int id;
+
+    private final int id;
+    private int percentage = 0;
+
+    private String name;
+
     private final ArrayList<TaskComment> comments = new ArrayList<>();
     private final ArrayList<TeamMember> teamMembers = new ArrayList<>();
 
     private LocalDateTime start;
     private LocalDateTime end;
 
-    public Task(int id, LocalDateTime start, LocalDateTime end) {
+    public Task(int id, String name, LocalDateTime start, LocalDateTime end) {
         this.id = id;
+        this.name = name;
         this.end = end;
         this.start = start;
     }
 
     public void setPercentage(int percentage) {
-        id = percentage;
+        this.percentage = percentage;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public LocalDateTime getStart() {
@@ -42,4 +56,16 @@ public class Task {
         return teamMembers;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
