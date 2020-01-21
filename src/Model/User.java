@@ -49,6 +49,7 @@ public class User {
         return username.equals(user.username);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(username);
