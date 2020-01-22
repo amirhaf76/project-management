@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Manager extends User {
 
-    private int managerId;
+    private final int managerId;
 
     public Manager(int managerId, User user) {
         super(user.getUsername(),

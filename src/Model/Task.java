@@ -25,7 +25,8 @@ public class Task {
     }
 
     public void setPercentage(int percentage) {
-        this.percentage = percentage;
+        if ( percentage >= 0 && percentage <= 100)
+            this.percentage = percentage;
     }
 
     public int getId() {

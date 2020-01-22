@@ -4,18 +4,14 @@ import java.util.Objects;
 
 public class TaskComment {
 
-    private final TaskComment taskComment;
+    private final User user;
     private final int id;
     private String text;
 
-    public TaskComment(TaskComment taskComment, int id, String text) {
-        this.taskComment = taskComment;
+    public TaskComment(User user, int id, String text) {
+        this.user = user;
         this.id = id;
         this.text = text;
-    }
-
-    public TaskComment getTaskComment() {
-        return taskComment;
     }
 
     public int getId() {
@@ -24,6 +20,10 @@ public class TaskComment {
 
     public String getText() {
         return text;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setText(String text) {
@@ -36,11 +36,11 @@ public class TaskComment {
         if (o == null || getClass() != o.getClass()) return false;
         TaskComment that = (TaskComment) o;
         return id == that.id &&
-                taskComment.equals(that.taskComment);
+                user.equals(that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskComment, id);
+        return Objects.hash(user, id);
     }
 }
