@@ -10,7 +10,7 @@ public class User {
     private String email;
     private String phoneNumber;
 
-    private final ArrayList<Project> projects = new ArrayList<Project>();
+    private final ArrayList<Project> projects = new ArrayList<>();
 
     public User(String username, String password, String email, String phoneNumber) {
         this.username = username;

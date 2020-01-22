@@ -3,8 +3,7 @@ package Model;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,10 +37,24 @@ class UserTest {
 
     @Test
     void getJoinedProjects() {
+        Project[] projects = new Project[2];
+        projects[0] = new Project(new Manager(1, user));
+        projects[1] = new Project(new Manager(2, user));
 
+        user.getProjects().add(projects[0]);
+        user.getProjects().add(projects[1]);
+
+        assertArrayEquals(projects, user.getProjects().toArray());
     }
 
     @Test
     void equals() {
+        User user2 = new User("user#2","password#2",
+                "user_2@email.com", "###-2");
+        User user3 = new User("user#1","password#3",
+                "user_3@email.com", "###-3");
+
+        assertNotEquals(user, user2);
+        assertEquals(user, user3);
     }
 }
