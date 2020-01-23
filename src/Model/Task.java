@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Task {
 
+    private static int baseTaskId = 1;
+
     private final int id;
     private int percentage = 0;
 
@@ -17,16 +19,13 @@ public class Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
-    public Task(int id, String name, LocalDateTime start, LocalDateTime end) {
-        this.id = id;
+    public Task(String name, LocalDateTime start, LocalDateTime end) {
+        this.id = baseTaskId;
         this.name = name;
         this.end = end;
         this.start = start;
-    }
 
-    public void setPercentage(int percentage) {
-        if ( percentage >= 0 && percentage <= 100)
-            this.percentage = percentage;
+        baseTaskId++;
     }
 
     public int getId() {
@@ -55,6 +54,31 @@ public class Task {
 
     public ArrayList<TeamMember> getTeamMembers() {
         return teamMembers;
+    }
+
+    public void setPercentage(int percentage) {
+        if ( percentage >= 0 && percentage <= 100)
+            this.percentage = percentage;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public static int getBaseTaskId() {
+        return baseTaskId;
+    }
+
+    public static void setBaseTaskId(int baseTaskId) {
+        Task.baseTaskId = baseTaskId;
     }
 
     @Override

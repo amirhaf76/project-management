@@ -1,6 +1,10 @@
-package Model;
+package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import Model.Team;
+import Model.TeamMember;
+import Model.User;
 import org.junit.jupiter.api.*;
 
 import java.util.Random;
@@ -25,21 +29,29 @@ class TeamMemberTest {
 
     @Test
     void getTeamMemberId() {
-        Random random = new Random(400L);
-        int id = random.nextInt();
+        int id = TeamMember.getBaseTeamMemberId();
 
-        TeamMember teamMember = new TeamMember(id, user1);
+        TeamMember teamMember = new TeamMember(user1);
 
         assertEquals(id, teamMember.getTeamMemberId());
     }
 
     @Test
     void equals() {
-        TeamMember teamMember1 = new TeamMember(1, user1);
-        TeamMember teamMember2 = new TeamMember(2, user1);
-        TeamMember teamMember3 = new TeamMember(1, user2);
-        TeamMember teamMember4 = new TeamMember(2, user2);
-        TeamMember teamMember5 = new TeamMember(1, user1);
+        int id = TeamMember.getBaseTeamMemberId();
+        TeamMember teamMember1 = new TeamMember(user1);
+
+        // same id
+        TeamMember.setBaseTeamMemberId(id);
+        TeamMember teamMember2 = new TeamMember(user2);
+
+        // same user
+        TeamMember teamMember3 = new TeamMember(user1);
+
+        TeamMember teamMember4 = new TeamMember(user2);
+
+        TeamMember.setBaseTeamMemberId(teamMember1.getTeamMemberId());
+        TeamMember teamMember5 = new TeamMember(user1);
 
         // same id
         assertNotEquals(teamMember1, teamMember3);
@@ -50,6 +62,8 @@ class TeamMemberTest {
         // nothing same
         assertNotEquals(teamMember1, teamMember4);
 
+        System.out.println(teamMember1.getTeamMemberId());
+        System.out.println(teamMember5.getTeamMemberId());
         // all same
         assertEquals(teamMember1, teamMember5);
     }

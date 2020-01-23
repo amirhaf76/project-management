@@ -1,5 +1,8 @@
-package Model;
+package Test;
 
+import Model.Manager;
+import Model.Project;
+import Model.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -5,14 +5,18 @@ import java.util.Objects;
 
 public class Team {
 
+    private static int baseTeamId = 1;
+
     private final int teamId;
     private String name;
 
     private final ArrayList<TeamMember> teamMembers = new ArrayList<>();
 
-    public Team(int teamId, String name) {
+    public Team(String name) {
         this.name = name;
-        this.teamId = teamId;
+        this.teamId = baseTeamId;
+        baseTeamId++;
+        System.out.println(name + teamId);
     }
 
     public ArrayList<TeamMember> getTeamMembers() {
@@ -25,6 +29,18 @@ public class Team {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static int getBaseTeamId() {
+        return baseTeamId;
+    }
+
+    public static void setBaseTeamId(int baseTeamId) {
+        Team.baseTeamId = baseTeamId;
     }
 
     @Override
