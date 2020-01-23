@@ -7,9 +7,8 @@ public class Project {
 
     static private int projectId = 1;
 
-    private int teamMembersId = 1;
-
     private final int id;
+
     private Manager manager;
     private ArrayList<Team> teams = new ArrayList<>();
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -25,20 +24,11 @@ public class Project {
         this.manager = manager;
     }
 
-    public void addTeamMembers(Team team, User user) {
-        if ( teams.contains(team) ) {
-            team.getTeamMembers().add(
-                    new TeamMember(teamMembersId, user)
-            );
-            teamMembersId++;
-        }
-    }
-
     public int getId() {
         return id;
     }
 
-    public Manager getManger() {
+    public Manager getManager() {
         return manager;
     }
 
@@ -50,12 +40,13 @@ public class Project {
         return tasks;
     }
 
-    // TODO: 1/17/2020 ????
-    public void createGaanttChart(){ }
-
     public GanttChart getGanttChart() {
         return ganttChart;
     }
+
+
+    // TODO: 1/17/2020 ????
+    public void createGaanttChart(){ }
 
     @Override
     public boolean equals(Object o) {

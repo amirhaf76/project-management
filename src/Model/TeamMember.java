@@ -4,15 +4,30 @@ import java.util.Objects;
 
 public class TeamMember extends User {
 
+    private static int baseTeamMemberId = 1;
+
     private final int teamMemberId;
 
-    public TeamMember(int teamMemberId, User user) {
+    public TeamMember(User user) {
         super(user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-        this.teamMemberId = teamMemberId;
+        this.teamMemberId = baseTeamMemberId;
+        baseTeamMemberId++;
+    }
+
+    public static void setBaseTeamMemberId(int baseTeamMemberId) {
+        TeamMember.baseTeamMemberId = baseTeamMemberId;
+    }
+
+    public static int getBaseTeamMemberId() {
+        return baseTeamMemberId;
+    }
+
+    public int getTeamMemberId() {
+        return teamMemberId;
     }
 
     public boolean setPercentageOnTask(Task task, int percentage) {
@@ -21,10 +36,6 @@ public class TeamMember extends User {
             return true;
         }
         return false;
-    }
-
-    public int getTeamMemberId() {
-        return teamMemberId;
     }
 
     @Override

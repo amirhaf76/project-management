@@ -1,5 +1,9 @@
-package Model;
+package Test;
 
+import Model.Task;
+import Model.TaskComment;
+import Model.TeamMember;
+import Model.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,6 +19,8 @@ class TaskTest {
     private static final LocalDateTime LOCAL_DATE_TIME = LocalDateTime.now();
     private static final Random RANDOM = new Random(400L);
 
+    private static int baseTaskId = Task.getBaseTaskId();
+
 
     private static final User USER = new User("user#1",
             "password#1",
@@ -22,10 +28,12 @@ class TaskTest {
             "###-1"
     );
 
+
+
     static {
+
         for (int i = 0; i < TASKS.length; i++ ) {
-            TASKS[i] = new Task(i,
-                    "TASKS#" + i,
+            TASKS[i] = new Task("TASKS#" + i,
                     LOCAL_DATE_TIME,
                     LOCAL_DATE_TIME.plusDays(i + 1) // " + 1 " cause i start from zero
             );
@@ -67,7 +75,7 @@ class TaskTest {
     @Test
     void getId() {
         for (int i = 0; i < TASKS.length; i++)
-            assertEquals(i, TASKS[i].getId());
+            assertEquals(baseTaskId + i, TASKS[i].getId());
     }
 
     @Test
@@ -89,7 +97,7 @@ class TaskTest {
 
     @Test
     void getComments() {
-        TaskComment comment = new TaskComment(USER, 1, "COMMENT");
+        TaskComment comment = new TaskComment(USER, "COMMENT");
 
         ArrayList<TaskComment> comments1 = TASKS[0].getComments();
         comments1.add(comment);
@@ -101,7 +109,7 @@ class TaskTest {
 
     @Test
     void getTeamMembers() {
-        TeamMember teamMember = new TeamMember(1, USER);
+        TeamMember teamMember = new TeamMember(USER);
 
         ArrayList<TeamMember> teamMembers1 = TASKS[0].getTeamMembers();
         teamMembers1.add(teamMember);
