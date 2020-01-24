@@ -4,19 +4,31 @@ import java.util.Objects;
 
 public class Manager extends User {
 
+    private static int baseManagerId = 1;
+
     private final int managerId;
 
-    public Manager(int managerId, User user) {
+    public Manager(User user) {
         super(user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-        this.managerId = managerId;
+        this.managerId = baseManagerId;
+
+        baseManagerId++;
     }
 
     public int getManagerId() {
         return managerId;
+    }
+
+    public static int getBaseManagerId() {
+        return baseManagerId;
+    }
+
+    public static void setBaseManagerId(int baseManagerId) {
+        Manager.baseManagerId = baseManagerId;
     }
 
     @Override

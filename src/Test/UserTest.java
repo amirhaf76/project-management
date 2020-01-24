@@ -41,8 +41,8 @@ class UserTest {
     @Test
     void getJoinedProjects() {
         Project[] projects = new Project[2];
-        projects[0] = new Project(new Manager(1, user));
-        projects[1] = new Project(new Manager(2, user));
+        projects[0] = new Project(new Manager(user));
+        projects[1] = new Project(new Manager(user));
 
         user.getProjects().add(projects[0]);
         user.getProjects().add(projects[1]);

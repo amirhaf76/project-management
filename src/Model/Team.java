@@ -16,7 +16,6 @@ public class Team {
         this.name = name;
         this.teamId = baseTeamId;
         baseTeamId++;
-        System.out.println(name + teamId);
     }
 
     public ArrayList<TeamMember> getTeamMembers() {
