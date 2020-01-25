@@ -1,11 +1,14 @@
 package view;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /** @noinspection ALL*/
 public class Login extends JFrame{
@@ -15,9 +18,7 @@ public class Login extends JFrame{
 
     public Login() {
         super("Login");
-    }
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
+        JFrame frame = this;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -34,11 +35,11 @@ public class Login extends JFrame{
 
         frame.setResizable(false);
         frame.setVisible(true);
-
+//
 //        try {
 //            Image image = ImageIO.read(new File("F:\\Amir\\pdf\\Software Engineering\\ProjectManagement\\DSC100256920.jpg"));
 //            JLabel backGround = new JLabel( new ImageIcon(image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//            frame.add(backGround);
+//            frame.getLayeredPane().add(backGround, JLayeredPane.FRAME_CONTENT_LAYER);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -106,8 +107,8 @@ public class Login extends JFrame{
         frame.add(ok, grid, 1);
         frame.pack();
         frame.validate();
-
     }
+
 
     public static JTextField getUsernameField() {
         return usernameField;

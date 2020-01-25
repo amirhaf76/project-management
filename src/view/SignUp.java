@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** @noinspection ALL*/
-public class SignUp {
+public class SignUp extends JFrame{
 
     private static JTextField usernameField = new JTextField(16);
     private static JTextField emailField = new JTextField(16);
@@ -15,7 +15,8 @@ public class SignUp {
     private static JPasswordField passwordField = new JPasswordField(16);
 
     public SignUp () {
-        JFrame frame = new JFrame("Sign up");
+        super("Sign Up");
+        JFrame frame = this;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 

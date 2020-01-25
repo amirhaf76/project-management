@@ -10,8 +10,9 @@ public class AddTeam extends JFrame {
 
     private static JTextField teamName = new JTextField(16);
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Add team");
+    public AddTeam() {
+        super("Add Team");
+        JFrame frame = this;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
