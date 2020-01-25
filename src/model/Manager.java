@@ -1,22 +1,38 @@
-package Model;
+package model;
 
 import java.util.Objects;
 
 public class Manager extends User {
 
-    private final int managerId;
+    private static int baseManagerId = 1;
 
-    public Manager(int managerId, User user) {
+    private int managerId;
+
+    public Manager(User user) {
         super(user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-        this.managerId = managerId;
+//        this.managerId = baseManagerId;
+//
+//        baseManagerId++;
     }
 
     public int getManagerId() {
         return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
+
+    public static int getBaseManagerId() {
+        return baseManagerId;
+    }
+
+    public static void setBaseManagerId(int baseManagerId) {
+        Manager.baseManagerId = baseManagerId;
     }
 
     @Override

@@ -1,13 +1,15 @@
-package Model;
+package model;
+
+import view.GanttChart;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Project {
 
-    static private int projectId = 1;
+//    static private int baseProjectId = 1;
 
-    private final int id;
+    private int id;
 
     private Manager manager;
     private ArrayList<Team> teams = new ArrayList<>();
@@ -16,8 +18,8 @@ public class Project {
 
     public Project(Manager manager) {
         this.manager = manager;
-        this.id = projectId;
-        projectId++;
+//        this.id = baseProjectId;
+//        baseProjectId++;
     }
 
     public void changeManger(Manager manager) {
@@ -44,6 +46,21 @@ public class Project {
         return ganttChart;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+//    public static int getBaseProjectId() {
+//        return baseProjectId;
+//    }
+//
+//    public static void setBaseProjectId(int baseProjectId) {
+//        Project.baseProjectId = baseProjectId;
+//    }
 
     // TODO: 1/17/2020 ????
     public void createGaanttChart(){ }
