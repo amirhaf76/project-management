@@ -1,5 +1,6 @@
-package Model;
+package Test;
 
+import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

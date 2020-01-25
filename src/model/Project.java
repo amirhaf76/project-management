@@ -1,4 +1,6 @@
-package Model;
+package model;
+
+import view.GanttChart;
 
 import java.util.ArrayList;
 import java.util.Objects;

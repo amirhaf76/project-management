@@ -1,9 +1,9 @@
 package Test;
 
-import Model.Task;
-import Model.TaskComment;
-import Model.TeamMember;
-import Model.User;
+import model.Task;
+import model.TaskComment;
+import model.TeamMember;
+import model.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

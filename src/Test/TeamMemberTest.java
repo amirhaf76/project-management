@@ -2,12 +2,9 @@ package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import Model.Team;
-import Model.TeamMember;
-import Model.User;
+import model.TeamMember;
+import model.User;
 import org.junit.jupiter.api.*;
-
-import java.util.Random;
 
 class TeamMemberTest {
 

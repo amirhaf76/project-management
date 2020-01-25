@@ -1,12 +1,8 @@
 package Test;
 
-import Model.Task;
-import Model.TaskComment;
-import Model.Team;
-import Model.User;
+import model.TaskComment;
+import model.User;
 import org.junit.jupiter.api.Test;
-
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 

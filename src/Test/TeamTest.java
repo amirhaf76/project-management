@@ -1,8 +1,8 @@
 package Test;
 
-import Model.Team;
-import Model.TeamMember;
-import Model.User;
+import model.Team;
+import model.TeamMember;
+import model.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
