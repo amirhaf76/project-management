@@ -1,28 +1,21 @@
 package view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
-import static javax.swing.JOptionPane.*;
-
-public class CreateTask {
-    private static JLabel username = new JLabel("Username");
-    private static JLabel password = new JLabel("Password");
-    private static JLabel email = new JLabel("Email");
-    private static JLabel phoneNumber = new JLabel("Phone number");
+/** @noinspection ALL*/
+public class SignUp {
 
     private static JTextField usernameField = new JTextField(16);
     private static JTextField emailField = new JTextField(16);
     private static JTextField phoneField = new JTextField(16);
     private static JPasswordField passwordField = new JPasswordField(16);
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Create Task");
+
+    public SignUp () {
+        JFrame frame = new JFrame("Sign up");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -48,6 +41,10 @@ public class CreateTask {
 //            e.printStackTrace();
 //        }
 
+        JLabel username = new JLabel("Username");
+        JLabel password = new JLabel("Password");
+        JLabel email = new JLabel("Email");
+        JLabel phoneNumber = new JLabel("Phone number");
 
 
         Dimension labelDimension = new Dimension(frame.getWidth()/5, frame.getHeight()/5);
@@ -109,7 +106,7 @@ public class CreateTask {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(usernameField.getText());
+                // TODO: 1/25/2020 create user and send it to database
             }
         });
         grid.gridwidth = 5;
@@ -120,7 +117,6 @@ public class CreateTask {
         frame.add(ok, grid, 1);
         frame.pack();
         frame.validate();
-
     }
 
     public static JTextField getUsernameField() {

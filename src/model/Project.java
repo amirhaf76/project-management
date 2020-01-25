@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public class Project {
 
-    static private int baseProjectId = 1;
+//    static private int baseProjectId = 1;
 
-    private final int id;
+    private int id;
 
     private Manager manager;
     private ArrayList<Team> teams = new ArrayList<>();
@@ -18,8 +18,8 @@ public class Project {
 
     public Project(Manager manager) {
         this.manager = manager;
-        this.id = baseProjectId;
-        baseProjectId++;
+//        this.id = baseProjectId;
+//        baseProjectId++;
     }
 
     public void changeManger(Manager manager) {
@@ -46,13 +46,21 @@ public class Project {
         return ganttChart;
     }
 
-    public static int getBaseProjectId() {
-        return baseProjectId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static void setBaseProjectId(int baseProjectId) {
-        Project.baseProjectId = baseProjectId;
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
+
+//    public static int getBaseProjectId() {
+//        return baseProjectId;
+//    }
+//
+//    public static void setBaseProjectId(int baseProjectId) {
+//        Project.baseProjectId = baseProjectId;
+//    }
 
     // TODO: 1/17/2020 ????
     public void createGaanttChart(){ }

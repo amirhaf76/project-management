@@ -1,6 +1,8 @@
 package view;
 
 import model.Task;
+import model.Team;
+import model.TeamMember;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,62 +12,68 @@ import java.util.ArrayList;
 public class ManagementView extends JFrame {
     public static void main(String[] atgs) {
 
-        JFrame frame  = new JFrame("Project Management");
-        GanttChart ganttChart = new GanttChart("hello", new ArrayList<Task>());
-
+        Login login = new Login();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
+
+        GanttChart ganttChart = new GanttChart("hello", new ArrayList<>());
+
+        // frame
         Dimension frameSize = new Dimension(1000, 400);
-
-        JList<Task> jList = new JList<>();
-        jList.setListData(new Task[]{new Task("task", LocalDateTime.now(), LocalDateTime.now())});
-
-
+        JFrame frame  = new JFrame("Project Management");
         frame.setLayout(null);
         frame.setSize(frameSize);
-        frame.setBackground(Color.gray);
         frame.setLocation(screenSize.width/8, screenSize.height/4);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(true);
 
-        JPanel panel1 = new JPanel(null);
-        JPanel panel2 = new JPanel(null);
-        panel1.setBackground(Color.red);
-        panel2.setBackground(Color.blue);
+        // list
+        Dimension listDimension = new Dimension(frameSize.width / 5, frameSize.height / 5);
+        JList<Task> todo = new JList<>();
+        JList<Task> doing = new JList<>();
+        JList<Task> done = new JList<>();
+        JList<Team> teamJList = new JList<>();
+        JList<TeamMember> teamMemberJList = new JList<>();
 
-//        panel1.setLocation(0,0);
-//        panel1.setSize(frameSize.width/2, frameSize.height);
-//        panel1.setPreferredSize(new Dimension(frameSize.width/2, frameSize.height));
-        panel1.setBounds(0 , 0,200, frameSize.height);
-        jList.setBounds(0 , 0,200, frameSize.height);
-        jList.setVisibleRowCount(2);
-        jList.setBackground(Color.cyan);
-        jList.setBorder(BorderFactory.createLoweredBevelBorder());
-        jList.setVisible(true);
-        panel1.add(jList);
-        panel1.setVisible(true);
+        todo.setBackground(Color.cyan);
+        doing.setBackground(Color.red);
+        done.setBackground(Color.gray);
+        teamJList.setBackground(Color.YELLOW);
+        teamMemberJList.setBackground(Color.black);
 
-//        panel2.setLocation(frameSize.width/2, 0);
-//        panel2.setSize(frameSize.width/2, frameSize.height);
-//        panel2.setPreferredSize(new Dimension(frameSize.width/2, frameSize.height));
-        panel2.setBounds(200, 0, 800, frameSize.height);
-//        panel2.setBorder(BorderFactory.createLoweredBevelBorder());
-//        ganttChart.setSize(800, frameSize.height);
-//        ganttChart.setBounds(0,0,800, frameSize.height);
-//        panel2.add(ganttChart);
-        panel2.setVisible(true);
+        todo.setPreferredSize(listDimension);
+        doing.setPreferredSize(listDimension);
+        done.setPreferredSize(listDimension);
+        teamJList.setPreferredSize(listDimension);
+        teamMemberJList.setPreferredSize(listDimension);
 
-        SwingUtilities.invokeLater(() -> {
-            GanttChart example = new GanttChart("Gantt Chart Example", new ArrayList<>());
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
+        // panel
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setSize(frameSize);
+        GridBagConstraints grid = new GridBagConstraints();
 
+//        grid.fill = GridBagConstraints.HORIZONTAL;
+//        grid.gridy = 0;
+//        grid.gridx = 0;
+//        grid.gridheight = 1;
+//        grid.gridwidth = 1;
+//        grid.weightx = 1;
+//        grid.weighty = 1;
+//        grid.anchor = GridBagConstraints.CENTER;
+//
+//        panel.add(teamJList, grid);
+//        grid.gridx = 1;
+//        panel.add(teamMemberJList, grid);
+//        grid.gridx = 2;
+//        panel.add(todo, grid);
+//        grid.gridx = 3;
+//        panel.add(doing, grid);
+//        grid.gridx = 4;
+//        panel.add(done, grid);
 
-        frame.add(panel1, BorderLayout.CENTER);
-        frame.add(panel2, BorderLayout.WEST);
+        frame.getContentPane().add(panel);
+//        frame.pack();
+        frame.invalidate();
 
     }
 }

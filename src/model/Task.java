@@ -8,25 +8,25 @@ public class Task {
 
     private static int baseTaskId = 1;
 
-    private final int id;
+    private int id;
     private int percentage = 0;
 
     private String name;
     private State state = State.TO_DO;
 
-    private final ArrayList<TaskComment> comments = new ArrayList<>();
-    private final ArrayList<TeamMember> teamMembers = new ArrayList<>();
+    private ArrayList<TaskComment> comments = new ArrayList<>();
+    private ArrayList<TeamMember> teamMembers = new ArrayList<>();
 
     private LocalDateTime start;
     private LocalDateTime end;
 
     public Task(String name, LocalDateTime start, LocalDateTime end) {
-        this.id = baseTaskId;
+//        this.id = baseTaskId;
         this.name = name;
         this.end = end;
         this.start = start;
 
-        baseTaskId++;
+//        baseTaskId++;
     }
 
     public int getId() {
@@ -59,6 +59,18 @@ public class Task {
 
     public State getState() {
         return state;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setComments(ArrayList<TaskComment> comments) {
+        this.comments = comments;
+    }
+
+    public void setTeamMembers(ArrayList<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
     }
 
     public void setPercentage(int percentage) {

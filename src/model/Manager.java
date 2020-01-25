@@ -6,7 +6,7 @@ public class Manager extends User {
 
     private static int baseManagerId = 1;
 
-    private final int managerId;
+    private int managerId;
 
     public Manager(User user) {
         super(user.getUsername(),
@@ -14,13 +14,17 @@ public class Manager extends User {
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-        this.managerId = baseManagerId;
-
-        baseManagerId++;
+//        this.managerId = baseManagerId;
+//
+//        baseManagerId++;
     }
 
     public int getManagerId() {
         return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
     public static int getBaseManagerId() {

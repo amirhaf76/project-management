@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class TeamMember extends User {
 
-    private static int baseTeamMemberId = 1;
+//    private static int baseTeamMemberId = 1;
 
-    private final int teamMemberId;
+    private int teamMemberId;
 
     public TeamMember(User user) {
         super(user.getUsername(),
@@ -14,20 +14,26 @@ public class TeamMember extends User {
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-        this.teamMemberId = baseTeamMemberId;
-        baseTeamMemberId++;
+//        this.teamMemberId = baseTeamMemberId;
+//        baseTeamMemberId++;
     }
 
-    public static void setBaseTeamMemberId(int baseTeamMemberId) {
-        TeamMember.baseTeamMemberId = baseTeamMemberId;
-    }
+    // TODO: 1/25/2020 erase
+//    public static void setBaseTeamMemberId(int baseTeamMemberId) {
+//        TeamMember.baseTeamMemberId = baseTeamMemberId;
+//    }
+//
+//    public static int getBaseTeamMemberId() {
+//        return baseTeamMemberId;
+//    }
 
-    public static int getBaseTeamMemberId() {
-        return baseTeamMemberId;
-    }
 
     public int getTeamMemberId() {
         return teamMemberId;
+    }
+
+    public void setTeamMemberId(int teamMemberId) {
+        this.teamMemberId = teamMemberId;
     }
 
     public boolean setPercentageOnTask(Task task, int percentage) {

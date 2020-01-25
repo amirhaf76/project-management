@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class Team {
 
-    private static int baseTeamId = 1;
+//    private static int baseTeamId = 1;
 
-    private final int teamId;
+    private int teamId;
     private String name;
 
-    private final ArrayList<TeamMember> teamMembers = new ArrayList<>();
+    private ArrayList<TeamMember> teamMembers = new ArrayList<>();
 
     public Team(String name) {
         this.name = name;
-        this.teamId = baseTeamId;
-        baseTeamId++;
+//        this.teamId = baseTeamId;
+//        baseTeamId++;
     }
 
     public ArrayList<TeamMember> getTeamMembers() {
@@ -34,13 +34,21 @@ public class Team {
         this.name = name;
     }
 
-    public static int getBaseTeamId() {
-        return baseTeamId;
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
-    public static void setBaseTeamId(int baseTeamId) {
-        Team.baseTeamId = baseTeamId;
+    public void setTeamMembers(ArrayList<TeamMember> teamMembers) {
+        this.teamMembers = teamMembers;
     }
+
+    //    public static int getBaseTeamId() {
+//        return baseTeamId;
+//    }
+//
+//    public static void setBaseTeamId(int baseTeamId) {
+//        Team.baseTeamId = baseTeamId;
+//    }
 
     @Override
     public boolean equals(Object o) {

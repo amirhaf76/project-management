@@ -4,18 +4,18 @@ import java.util.Objects;
 
 public class TaskComment {
 
-    private static int baseCommentId = 1;
+//    private static int baseCommentId = 1;
 
     private final User user;
-    private final int id;
+    private int id;
     private String text;
 
     public TaskComment(User user, String text) {
         this.user = user;
-        this.id = baseCommentId;
+//        this.id = baseCommentId;
         this.text = text;
 
-        baseCommentId++;
+//        baseCommentId++;
     }
 
     public int getId() {
@@ -34,13 +34,17 @@ public class TaskComment {
         this.text = text;
     }
 
-    public static int getBaseCommentId() {
-        return baseCommentId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static void setBaseCommentId(int baseCommentId) {
-        TaskComment.baseCommentId = baseCommentId;
-    }
+    //    public static int getBaseCommentId() {
+//        return baseCommentId;
+//    }
+//
+//    public static void setBaseCommentId(int baseCommentId) {
+//        TaskComment.baseCommentId = baseCommentId;
+//    }
 
     @Override
     public boolean equals(Object o) {

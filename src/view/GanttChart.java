@@ -80,6 +80,16 @@ public class GanttChart extends JFrame{
         return dataset;
     }
 
+    public void openGantt() {
+        SwingUtilities.invokeLater(() -> {
+            GanttChart example = this;
+            example.setSize(800, 400);
+            example.setLocationRelativeTo(null);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
+        });
+    }
+
 }
 
 
