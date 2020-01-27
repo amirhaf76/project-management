@@ -91,6 +91,12 @@ public class ProjectsView extends JFrame {
 
             }
         });
+        createProject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CreateProject();
+            }
+        });
 
 
         // JPanel
@@ -138,7 +144,7 @@ public class ProjectsView extends JFrame {
 
     }
 
-    private void update(Project project){
-
+    public void updateProjectView(){
+        // TODO: 1/27/2020 get list of project from database
     }
 }

@@ -63,4 +63,9 @@ public class Team {
     public int hashCode() {
         return Objects.hash(teamId, name);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
