@@ -12,15 +12,13 @@ public class AddTeam extends JFrame {
 
     public AddTeam() {
         super("Add Team");
-        JFrame frame = this;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        frame.setLocation(screenSize.width/3, screenSize.height/3);
-        frame.setSize(screenSize.width/3, screenSize.height/3);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        frame.setLayout(new GridBagLayout());
+        super.setLocation(screenSize.width/3, screenSize.height/3);
+        super.setSize(screenSize.width/3, screenSize.height/3);
+        super.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        super.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
 
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -28,21 +26,10 @@ public class AddTeam extends JFrame {
         grid.weighty = 1;
         grid.anchor = grid.CENTER;
 
-        frame.setResizable(false);
-        frame.setVisible(true);
-
-//        try {
-//            Image image = ImageIO.read(new File("F:\\Amir\\pdf\\Software Engineering\\ProjectManagement\\DSC100256920.jpg"));
-//            JLabel backGround = new JLabel( new ImageIcon(image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//            frame.add(backGround);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         JLabel username = new JLabel("Enter name for team");
 
 
-        Dimension labelDimension = new Dimension(2 * frame.getWidth()/5, frame.getHeight()/5);
+        Dimension labelDimension = new Dimension(2 * super.getWidth()/5, super.getHeight()/5);
         username.setPreferredSize(labelDimension);
 
         grid.gridwidth = 1;
@@ -50,11 +37,11 @@ public class AddTeam extends JFrame {
         grid.gridx = 0;
         grid.gridy = 0;
 
-        frame.add(username, grid);
+        super.add(username, grid);
         grid.gridy = 1;
 
         // JTextField
-        Dimension fieldDimension = new Dimension(3 * frame.getWidth()/5, frame.getHeight()/5);
+        Dimension fieldDimension = new Dimension(3 * super.getWidth()/5, super.getHeight()/5);
 
         teamName.setBounds(labelDimension.width, 0, fieldDimension.width, fieldDimension.height);
 
@@ -62,10 +49,8 @@ public class AddTeam extends JFrame {
         grid.gridheight = 1;
         grid.gridx = 1;
         grid.gridy = 0;
-        frame.add(teamName, grid);
+        super.add(teamName, grid);
         grid.gridy = 1;
-
-
 
         JButton ok = new JButton("ok");
         ok.setBounds(0, 4 * labelDimension.height, labelDimension.width, labelDimension.height);
@@ -74,17 +59,26 @@ public class AddTeam extends JFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/25/2020 create user and send it to database
+                if (!teamName.getText().equals("")) {
+
+                    // TODO: 1/25/2020 create team and send it to database
+
+                    AddTeam.super.setVisible(false);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,
+                            "Choose a name for the team !",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
-        grid.gridwidth = 5;
-        grid.gridheight = 1;
-        grid.gridx = 0;
-        grid.gridy = 4;
 
-        frame.add(ok, grid, 1);
-        frame.pack();
-        frame.validate();
+        super.add(ok, grid, 1);
+        super.pack();
+        super.validate();
+        super.setResizable(false);
+        super.setVisible(true);
 
     }
 

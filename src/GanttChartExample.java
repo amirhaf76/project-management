@@ -43,7 +43,7 @@ public class GanttChartExample extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (comparable.equals("test") ) {
+                if (comparable.equals("GUI") ) {
                     System.out.println("yes");
 
                 }
@@ -78,7 +78,7 @@ public class GanttChartExample extends JFrame {
 
         TaskSeries series1 = new TaskSeries("Estimated Date");
 
-        Task t1 = new Task("test",
+        Task t1 = new Task("GUI",
                 Date.from(LocalDate.of(2017,7,3).atStartOfDay().toInstant(ZoneOffset.UTC)),
                 Date.from(LocalDate.of(2017, 7,7).atStartOfDay().toInstant(ZoneOffset.UTC))
         );

@@ -6,16 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 /** @noinspection ALL*/
 public class SignUp extends JFrame{
 
-    private static JTextField usernameField = new JTextField(16);
-    private static JTextField emailField = new JTextField(16);
-    private static JTextField phoneField = new JTextField(16);
-    private static JPasswordField passwordField = new JPasswordField(16);
+    private JTextField usernameField = new JTextField(16);
+    private JTextField emailField = new JTextField(16);
+    private JTextField phoneField = new JTextField(16);
+    private JPasswordField passwordField = new JPasswordField(16);
 
     public SignUp () {
         super("Sign Up");
@@ -25,7 +27,7 @@ public class SignUp extends JFrame{
 
         frame.setLocation(screenSize.width/3, screenSize.height/3);
         frame.setSize(screenSize.width/3, screenSize.height/3);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         frame.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
@@ -33,22 +35,11 @@ public class SignUp extends JFrame{
         grid.fill = GridBagConstraints.HORIZONTAL;
         grid.weightx = 1;
         grid.weighty = 1;
-//        grid.anchor = GridBagConstraints.CENTER;
 
         frame.setResizable(false);
         frame.setVisible(true);
 
 
-        JLayeredPane lp = frame.getLayeredPane();
-//        try {
-//            Image image = ImageIO.read(new File("F:\\Amir\\pdf\\Software Engineering\\ProjectManagement\\DSC100256920.jpg"));
-//            JLabel backGround = new JLabel( new ImageIcon(image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//            backGround.setBounds(0,0, frame.getWidth(),frame.getHeight());
-//            lp.add(backGround, -1);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         JLabel username = new JLabel("Username");
         JLabel password = new JLabel("Password");
@@ -84,16 +75,6 @@ public class SignUp extends JFrame{
         phoneField.setBounds(labelDimension.width, 2 * fieldDimension.height, fieldDimension.width, fieldDimension.height);
         passwordField.setBounds(labelDimension.width, fieldDimension.height, fieldDimension.width, fieldDimension.height);
 
-//        usernameField.setPreferredSize(fieldDimension);
-//        emailField.setPreferredSize(fieldDimension);
-//        passwordField.setPreferredSize(fieldDimension);
-//        phoneField.setPreferredSize(fieldDimension);
-//
-//        usernameField.setVisible(true);
-//        emailField.setVisible(true);
-//        passwordField.setVisible(true);
-//        phoneField.setVisible(true);
-
         grid.gridwidth = 4;
         grid.gridheight = 1;
         grid.gridx = 1;
@@ -115,7 +96,17 @@ public class SignUp extends JFrame{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/25/2020 create user and send it to database
+
+                if (usernameField.getText().equals("") || passwordField.getText().equals("") ||
+                phoneField.getText().equals("") || emailField.getText().equals("") ) {
+                    javax.swing.JOptionPane.showMessageDialog(null ,
+                        "Check Fields !",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    // TODO: 1/25/2020 create user and send it to database
+                    SignUp.super.setVisible(false);
+                }
             }
         });
         grid.gridwidth = 5;
@@ -128,19 +119,35 @@ public class SignUp extends JFrame{
         frame.validate();
     }
 
-    public static JTextField getUsernameField() {
+    public JTextField getUsernameField() {
         return usernameField;
     }
 
-    public static JTextField getEmailField() {
+    public void setUsernameField(JTextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public JTextField getEmailField() {
         return emailField;
     }
 
-    public static JTextField getPhoneField() {
+    public void setEmailField(JTextField emailField) {
+        this.emailField = emailField;
+    }
+
+    public JTextField getPhoneField() {
         return phoneField;
     }
 
-    public static JPasswordField getPasswordField() {
+    public void setPhoneField(JTextField phoneField) {
+        this.phoneField = phoneField;
+    }
+
+    public JPasswordField getPasswordField() {
         return passwordField;
+    }
+
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
     }
 }

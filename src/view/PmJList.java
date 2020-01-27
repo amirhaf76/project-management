@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
+/** @noinspection ALL*/
 public class PmJList<T> extends JList<T> {
 
     private JPopupMenu popupMenu = new JPopupMenu();
@@ -46,7 +47,7 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/26/2020 create new team and send to database
+                // TODO: 1/27/2020 show property of task
                 System.out.println(PmJList.super.getSelectedIndex());
             }
         });
@@ -58,7 +59,7 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/26/2020 create new team and send to database
+                // TODO: 1/27/2020 show property of teamMember
                 System.out.println(PmJList.super.getSelectedIndex());
             }
         });
@@ -70,7 +71,7 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/26/2020 create new team and send to database
+                // TODO: 1/27/2020 create team
                 System.out.println(PmJList.super.getSelectedIndex());
             }
         });
@@ -82,7 +83,7 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/26/2020 create new team and send to database
+                // TODO: 1/27/2020 create teamMember
             }
         });
         popupMenu.add(addTeam);

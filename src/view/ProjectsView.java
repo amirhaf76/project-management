@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,6 +16,7 @@ import java.awt.event.MouseEvent;
 public class ProjectsView extends JFrame {
 
     private User user;
+    private Project[] projects = new Project[0];
 
     public ProjectsView(){
         super("Project View");
@@ -56,7 +59,7 @@ public class ProjectsView extends JFrame {
         // JList
         Dimension listDimension = new Dimension(frameSize.width, frameSize.height);
         PmJList<Project> projectPmJList = new PmJList<>("Project",
-                new Project[2]);
+                projects);
         projectPmJList.setPreferredSize(listDimension);
 
         JScrollPane sp = new JScrollPane(projectPmJList);
@@ -81,6 +84,13 @@ public class ProjectsView extends JFrame {
 
         openProject.setBackground(color);
         createProject.setBackground(color);
+
+        openProject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
 
         // JPanel
@@ -125,6 +135,10 @@ public class ProjectsView extends JFrame {
         super.validate();
         super.setVisible(true);
 
+
+    }
+
+    private void update(Project project){
 
     }
 }

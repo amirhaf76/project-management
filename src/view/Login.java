@@ -9,112 +9,110 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 /** @noinspection ALL*/
 public class Login extends JFrame{
 
-    private static JTextField usernameField = new JTextField(16);
-    private static JPasswordField passwordField = new JPasswordField(16);
+    private JTextField usernameField = new JTextField(16);
+    private JPasswordField passwordField = new JPasswordField(16);
 
     public Login() {
         super("Login");
-        JFrame frame = this;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        frame.setLocation(screenSize.width/3, screenSize.height/3);
-        frame.setSize(screenSize.width/3, screenSize.height/3);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        super.setLocation(screenSize.width/3, screenSize.height/3);
+        super.setSize(screenSize.width/3, screenSize.height/3);
+        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        frame.setLayout(new GridBagLayout());
+        super.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
 
         grid.fill = GridBagConstraints.HORIZONTAL;
         grid.weightx = 1;
         grid.weighty = 1;
-
-        frame.setResizable(false);
-        frame.setVisible(true);
-//
-//        try {
-//            Image image = ImageIO.read(new File("F:\\Amir\\pdf\\Software Engineering\\ProjectManagement\\DSC100256920.jpg"));
-//            JLabel backGround = new JLabel( new ImageIcon(image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//            frame.getLayeredPane().add(backGround, JLayeredPane.FRAME_CONTENT_LAYER);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        JLabel username = new JLabel("Username");
-        JLabel password = new JLabel("Password");
-
-
-        Dimension labelDimension = new Dimension(frame.getWidth()/5, frame.getHeight()/5);
-        username.setPreferredSize(labelDimension);
-        password.setPreferredSize(labelDimension);
-
         grid.gridwidth = 1;
         grid.gridheight = 1;
         grid.gridx = 0;
         grid.gridy = 0;
 
-        frame.add(username, grid);
+
+
+        // label
+        Dimension labelDimension = new Dimension(super.getWidth()/5, super.getHeight()/5);
+        JLabel username = new JLabel("Username");
+        JLabel password = new JLabel("Password");
+
+        username.setPreferredSize(labelDimension);
+        password.setPreferredSize(labelDimension);
+
+
+        super.add(username, grid);
         grid.gridy = 1;
-        frame.add(password, grid);
+        super.add(password, grid);
 
 
         // JTextField
-        Dimension fieldDimension = new Dimension(4 * frame.getWidth()/5, frame.getHeight()/5);
+        Dimension fieldDimension = new Dimension(4 * super.getWidth()/5, super.getHeight()/5);
 
         usernameField.setBounds(labelDimension.width, 0, fieldDimension.width, fieldDimension.height);
         passwordField.setBounds(labelDimension.width, fieldDimension.height, fieldDimension.width, fieldDimension.height);
-
-//        usernameField.setPreferredSize(fieldDimension);
-//        emailField.setPreferredSize(fieldDimension);
-//        passwordField.setPreferredSize(fieldDimension);
-//        phoneField.setPreferredSize(fieldDimension);
-//
-//        usernameField.setVisible(true);
-//        emailField.setVisible(true);
-//        passwordField.setVisible(true);
-//        phoneField.setVisible(true);
 
         grid.gridwidth = 4;
         grid.gridheight = 1;
         grid.gridx = 1;
         grid.gridy = 0;
-        frame.add(usernameField, grid);
+        super.add(usernameField, grid);
         grid.gridy = 1;
-        frame.add(passwordField, grid);
-        grid.gridy = 2;
-
+        super.add(passwordField, grid);
 
 
         JButton ok = new JButton("ok");
-        ok.setBounds(0, 4 * labelDimension.height, labelDimension.width, labelDimension.height);
-
+        JButton signUp = new JButton("sign Up");
+        ok.setPreferredSize(new Dimension(labelDimension.width, labelDimension.height/2));
+        signUp.setPreferredSize(new Dimension(labelDimension.width, labelDimension.height/2));
 
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/25/2020 create user and send it to database
+
+                // TODO: 1/25/2020 check user from database
+//                if () {
+                    Login.super.setVisible(false);
+                    ProjectsView projectsView = new ProjectsView();
+                // TODO: 1/27/2020 get all project of user and show it
+//                }
+//                else {
+//                    javax.swing.JOptionPane.showMessageDialog(null ,
+//                            "Your username or Your password is wrong !",
+//                            "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+
+
             }
-        });
-        grid.gridwidth = 5;
-        grid.gridheight = 1;
+        });;
+        signUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SignUp signUp = new SignUp();
+            }
+        });;
+
+        grid.fill = GridBagConstraints.NONE;
         grid.gridx = 0;
-        grid.gridy = 4;
+        grid.gridy = 2;
+        grid.gridwidth = 2;
+        grid.anchor = GridBagConstraints.LAST_LINE_START;
+        super.add(ok, grid);
+        grid.gridx = 3;
+        grid.anchor = GridBagConstraints.LAST_LINE_END;
+        super.add(signUp, grid);
 
-        frame.add(ok, grid, 1);
-        frame.pack();
-        frame.validate();
+        super.pack();
+        super.validate();
+        super.setResizable(false);
+        super.setVisible(true);
     }
 
-
-    public static JTextField getUsernameField() {
-        return usernameField;
-    }
-
-    public static JPasswordField getPasswordField() {
-        return passwordField;
-    }
 }
