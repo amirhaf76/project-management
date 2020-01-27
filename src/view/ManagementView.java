@@ -9,6 +9,8 @@ import model.User;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 public class ManagementView extends JFrame{
 
     private User user;
+    private ArrayList<Task> list;
+    private GanttChart ganttChart;
 
     public ManagementView(User user) {
         super("Project Management");
@@ -28,7 +32,7 @@ public class ManagementView extends JFrame{
     private void createGUI() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
 
-        GanttChart ganttChart = new GanttChart( new ArrayList<>());
+        ganttChart = new GanttChart( new ArrayList<>());
         ganttChart.openGantt();
 
         // frame
@@ -105,6 +109,25 @@ public class ManagementView extends JFrame{
         createListener(teamJList);
         createListener(teamMemberJList);
 
+        teamJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    updateTeamMemberAndTasks();
+                    teamMemberJList.clearSelection();
+                }
+            }
+        });
+
+        teamMemberJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    updateTasks();
+                }
+            }
+        });
+
 
         // main panel
         JPanel panel = new JPanel(new GridBagLayout());
@@ -166,6 +189,17 @@ public class ManagementView extends JFrame{
         super.setVisible(true);
     }
 
+    private void updateTasks() {
+        // TODO: 1/28/2020 get team members from database
+        // TODO: 1/28/2020 get tasks from database
+
+    }
+
+    private void updateTeamMemberAndTasks() {
+        // TODO: 1/28/2020 get tasks from database
+
+    }
+
     private JScrollPane createJScrollPane(Component component, Dimension dimension, String name) {
         JScrollPane sp = new JScrollPane(component);
         sp.setSize(dimension);
@@ -199,7 +233,8 @@ public class ManagementView extends JFrame{
 
 
     public void updateManagementView(){
-
+        // TODO: 1/28/2020 get all tasks of project from database
+//        ganttChart.updateGantt();
     }
 
 
