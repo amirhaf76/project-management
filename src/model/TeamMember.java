@@ -57,4 +57,5 @@ public class TeamMember extends User {
     public int hashCode() {
         return Objects.hash(super.hashCode(), teamMemberId);
     }
+
 }

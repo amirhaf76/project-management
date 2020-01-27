@@ -24,7 +24,7 @@ public class AddTeam extends JFrame {
         grid.fill = GridBagConstraints.HORIZONTAL;
         grid.weightx = 1;
         grid.weighty = 1;
-        grid.anchor = grid.CENTER;
+        grid.anchor = GridBagConstraints.CENTER;
 
         JLabel username = new JLabel("Enter name for team");
 
@@ -86,7 +86,7 @@ public class AddTeam extends JFrame {
         return teamName;
     }
 
-    public void setTeamName(JTextField teamName) {
+    public void setTeamName() {
         this.teamName = teamName;
     }
 }
