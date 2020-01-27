@@ -1,3 +1,5 @@
+package model;
+
 /**
  * this is database class
  * this class includes all needed functions
