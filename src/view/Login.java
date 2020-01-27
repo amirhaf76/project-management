@@ -81,7 +81,7 @@ public class Login extends JFrame{
 //                if () {
                     Login.super.setVisible(false);
                     ProjectsView projectsView = new ProjectsView();
-                // TODO: 1/27/2020 get all project of user and show it
+
 //                }
 //                else {
 //                    javax.swing.JOptionPane.showMessageDialog(null ,
