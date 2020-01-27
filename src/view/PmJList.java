@@ -2,6 +2,7 @@ package view;
 
 import model.Project;
 import model.Task;
+import model.Team;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -19,6 +20,7 @@ public class PmJList<T> extends JList<T> {
 
     private JPopupMenu popupMenu = new JPopupMenu();
     private T[] list;
+    private ManagementView managementView;
 
     PmJList(String name, T[] list){
         super(list);
@@ -29,15 +31,6 @@ public class PmJList<T> extends JList<T> {
         super.setSelectionMode(SINGLE_SELECTION);
 
 
-
-        addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if ( !e.getValueIsAdjusting() ) {
-
-                }
-            }
-        });
 
     }
 
@@ -109,9 +102,12 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/28/2020 get all team of project from database
-//                AddUserToTeam addUserToTeam = new AddUserToTeam();
-
+                T temp = PmJList.super.getSelectedValuesList().get(
+                        PmJList.super.getSelectedIndex()
+                );
+                if ( temp instanceof Team) {
+                    AddUserToTeam addUserToTeam = new AddUserToTeam((Team)temp);
+                }
             }
         });
         popupMenu.add(addTeam);
@@ -127,5 +123,10 @@ public class PmJList<T> extends JList<T> {
 
     public void setList(T[] list) {
         this.list = list;
+    }
+
+    private void updateManagementView() {
+        if ( !(managementView == null) )
+            managementView.updateManagementView();
     }
 }
