@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class ManagementView extends JFrame{
 
     private User user;
-    private ArrayList<Task> tasks;
-    private ArrayList<Team> teams;
-    private ArrayList<TeamMember> teamMembers;
+    private static ArrayList<Task> tasks;
+    private static ArrayList<Team> teams;
+    private static ArrayList<TeamMember> teamMembers;
     private GanttChart ganttChart;
 
 
