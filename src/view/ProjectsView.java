@@ -34,7 +34,7 @@ public class ProjectsView extends JFrame {
         super.setSize(frameSize);
         super.setPreferredSize(frameSize);
         super.setLocation(screenSize.width/4, screenSize.height/4);
-        super.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         super.setBackground(color);
         super.setResizable(false);
 
@@ -89,6 +89,9 @@ public class ProjectsView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                new ManagementView(new User("user",
+                        "2222", "eamil", "445"));
+                ProjectsView.super.setVisible(false);
             }
         });
         createProject.addActionListener(new ActionListener() {

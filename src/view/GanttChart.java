@@ -20,15 +20,27 @@ public class GanttChart extends JFrame{
     private static final long serialVersionUID = 1L;
 
     private ArrayList<Task> tasks;
+    private ChartPanel chartPanel;
 
-    public GanttChart(String title, ArrayList<Task> tasks) {
+    public GanttChart(ArrayList<Task> tasks) {
         super();
-
         this.tasks = tasks;
+        chartPanel = createGantt();
+        getContentPane().add(chartPanel);
+    }
 
+    public void updateGantt(ArrayList<Task> tasks){
+        this.tasks = tasks;
+        super.getContentPane().remove(chartPanel);
+        chartPanel = createGantt();
+        getContentPane().add(chartPanel);
+        validate();
+    }
+
+    private ChartPanel createGantt(){
         IntervalCategoryDataset dataset = createCategoryDataset();
 
-        JFreeChart chart = ChartFactory.createGanttChart(title,
+        JFreeChart chart = ChartFactory.createGanttChart("Gantt Chart",
                 "Tasks",
                 "TimeLine",
                 dataset
@@ -36,14 +48,14 @@ public class GanttChart extends JFrame{
 
         ChartPanel chartPanel = new ChartPanel(chart);
 
-        JPopupMenu Popup = chartPanel.getPopupMenu();
-        JMenuItem property = new JMenuItem("property");
-        JMenuItem addPercentage = new JMenuItem("add percentage");
-        JMenuItem comments = new JMenuItem("comments");
-
-        Popup.add(property);
-        Popup.add(addPercentage);
-        Popup.add(comments);
+//        JPopupMenu Popup = chartPanel.getPopupMenu();
+//        JMenuItem property = new JMenuItem("property");
+//        JMenuItem addPercentage = new JMenuItem("add percentage");
+//        JMenuItem comments = new JMenuItem("comments");
+//
+//        Popup.add(property);
+//        Popup.add(addPercentage);
+//        Popup.add(comments);
 
         chartPanel.addChartMouseListener(new ChartMouseListener() {
             @Override
@@ -60,7 +72,7 @@ public class GanttChart extends JFrame{
             }
         });
 
-        getContentPane().add(chartPanel);
+        return chartPanel;
     }
 
 
