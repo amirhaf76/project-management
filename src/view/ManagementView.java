@@ -9,6 +9,8 @@ import model.User;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 public class ManagementView extends JFrame{
 
     private User user;
+    private ArrayList<Task> list;
+    private GanttChart ganttChart;
 
     public ManagementView(User user) {
         super("Project Management");
@@ -28,7 +32,8 @@ public class ManagementView extends JFrame{
     private void createGUI() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
 
-        GanttChart ganttChart = new GanttChart("hello", new ArrayList<>());
+        ganttChart = new GanttChart( new ArrayList<>());
+        ganttChart.openGantt();
 
         // frame
         Dimension frameSize = new Dimension(1000, 500);
@@ -49,32 +54,35 @@ public class ManagementView extends JFrame{
         JLabel usernameLabel2 = new JLabel("<Username>");
         JLabel typeOfUserLabel = new JLabel("type");
         JLabel typeOfUserLabel2 = new JLabel("<type>");
-        JButton closeProjectButton = new JButton("Close Project");
 
         usernameLabel.setPreferredSize(labelDimension);
         typeOfUserLabel.setPreferredSize(labelDimension);
-        closeProjectButton.setPreferredSize(new Dimension(labelDimension.width/2, labelDimension.height / 2));
 
+        // JButton
+        JButton closeProjectButton = new JButton("Close Project");
+        closeProjectButton.setPreferredSize(new Dimension(labelDimension.width/2, labelDimension.height / 2));
         closeProjectButton.setBackground(new Color(105,105,105));
 //        closeProjectButton.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
         closeProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ProjectsView();
+                ManagementView.super.setVisible(false);
+                ganttChart.setVisible(false);
             }
         });
 
-        // list
-        String[] s = new String[]{"hello", "hi"};
+        // PmJList
+        // TODO: 1/27/2020 get all teams of Project from database
         Task[] tasks = new Task[2];
         Team[] teams =new Team[2];
         TeamMember[] teamMembers = new TeamMember[5];
 
         Dimension listDimension = new Dimension(frameSize.width / 5,  frameSize.height-100);
-        PmJList<String> todo = new PmJList<>("ToDo", s);
-        PmJList<Task> doing = new PmJList<>("Doing", tasks);
-        PmJList<Task> done = new PmJList<>("Done", tasks);
-        PmJList<Team> teamJList = new PmJList<>("Team", teams);
+        PmJList<Task> todo = new PmJList<>("ToDo", new Task[0]); // her !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111
+        PmJList<Task> doing = new PmJList<>("Doing", new Task[0]);
+        PmJList<Task> done = new PmJList<>("Done", new Task[0]);
+        PmJList<Team> teamJList = new PmJList<>("Team", new Team[0]);
         PmJList<TeamMember> teamMemberJList = new PmJList<>("Team member", teamMembers);
 
         todo.setPreferredSize(listDimension);
@@ -89,14 +97,36 @@ public class ManagementView extends JFrame{
         teamMemberJList.setSize(listDimension);
 
         todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
+        todo.addSetPercentageToPopUp();doing.addSetPercentageToPopUp();done.addSetPercentageToPopUp();
         teamJList.addTeamToPopUp();
-        teamMemberJList.addTeamMemberPropertyToPopUp();teamMemberJList.addTeamMemberToPopUp();
+        teamMemberJList.addAddTeamMemberToPopUp();
+
+
 
         createListener(todo);
         createListener(doing);
         createListener(done);
         createListener(teamJList);
         createListener(teamMemberJList);
+
+        teamJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    updateTeamMemberAndTasks();
+                    teamMemberJList.clearSelection();
+                }
+            }
+        });
+
+        teamMemberJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    updateTasks();
+                }
+            }
+        });
 
 
         // main panel
@@ -159,6 +189,17 @@ public class ManagementView extends JFrame{
         super.setVisible(true);
     }
 
+    private void updateTasks() {
+        // TODO: 1/28/2020 get team members from database
+        // TODO: 1/28/2020 get tasks from database
+
+    }
+
+    private void updateTeamMemberAndTasks() {
+        // TODO: 1/28/2020 get tasks from database
+
+    }
+
     private JScrollPane createJScrollPane(Component component, Dimension dimension, String name) {
         JScrollPane sp = new JScrollPane(component);
         sp.setSize(dimension);
@@ -188,6 +229,12 @@ public class ManagementView extends JFrame{
                     list.clearSelection();
             }
         });
+    }
+
+
+    public void updateManagementView(){
+        // TODO: 1/28/2020 get all tasks of project from database
+//        ganttChart.updateGantt();
     }
 
 

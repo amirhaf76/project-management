@@ -1,21 +1,18 @@
 package view;
 
 import model.Task;
-import model.Team;
-import model.TeamMember;
-
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AssignTask extends JFrame {
+public class AddPercentage extends JFrame {
+    private JTextField projectName = new JTextField(16);
 
-    private JTextField username = new JTextField(16);
 
-    public AssignTask(Task task) {
-        super("Assign a task");
+    public AddPercentage(Task task) {
+        super("Add percentage");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -30,7 +27,7 @@ public class AssignTask extends JFrame {
         grid.weighty = 1;
         grid.anchor = GridBagConstraints.CENTER;
 
-        JLabel username = new JLabel("Enter name for team");
+        JLabel username = new JLabel("Enter name for project");
 
 
         Dimension labelDimension = new Dimension(2 * super.getWidth()/5, super.getHeight()/5);
@@ -47,13 +44,13 @@ public class AssignTask extends JFrame {
         // JTextField
         Dimension fieldDimension = new Dimension(3 * super.getWidth()/5, super.getHeight()/5);
 
-        this.username.setBounds(labelDimension.width, 0, fieldDimension.width, fieldDimension.height);
+        projectName.setBounds(labelDimension.width, 0, fieldDimension.width, fieldDimension.height);
 
         grid.gridwidth = 4;
         grid.gridheight = 1;
         grid.gridx = 1;
         grid.gridy = 0;
-        super.add(this.username, grid);
+        super.add(projectName, grid);
         grid.gridy = 1;
 
         JButton ok = new JButton("ok");
@@ -63,15 +60,14 @@ public class AssignTask extends JFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!AssignTask.this.username.getText().equals("")) {
+                if (!projectName.getText().equals("")) {
 
-                    // TODO: 1/25/2020 add teammember to the task in database
-
-                    AssignTask.super.setVisible(false);
+                    // TODO: 1/27/2020 update percentage in database
+                    AddPercentage.super.setVisible(false);
                 }
                 else {
                     JOptionPane.showMessageDialog(null,
-                            "Choose a name for the team !",
+                            "Choose a name for the project !",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }

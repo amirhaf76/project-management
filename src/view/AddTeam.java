@@ -1,5 +1,7 @@
 package view;
 
+import model.Project;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ public class AddTeam extends JFrame {
 
     private JTextField teamName = new JTextField(16);
 
-    public AddTeam() {
+    public AddTeam(Project project) {
         super("Add Team");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
