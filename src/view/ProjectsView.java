@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 public class ProjectsView extends JFrame {
 
     private User user;
-    private Project[] projects = new Project[0];
+    private static Project[] projects = new Project[0];
 
     public ProjectsView(){
         super("Project View");
@@ -41,7 +41,7 @@ public class ProjectsView extends JFrame {
         // JLabel
         Dimension labelDimension = new Dimension (frameSize.width/3, frameSize.height /3);
         JLabel profile = new JLabel("Profile");
-        // TODO: 1/28/2020 get User from database
+
         JLabel username = new JLabel("username");
 
         profile.setPreferredSize(labelDimension);
@@ -151,5 +151,21 @@ public class ProjectsView extends JFrame {
 
     public void updateProjectView(){
         // TODO: 1/27/2020 get list of project from database
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public static Project[] getProjects() {
+        return projects;
+    }
+
+    public static void setProjects(Project[] projects) {
+        ProjectsView.projects = projects;
     }
 }
