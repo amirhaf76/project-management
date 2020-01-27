@@ -1,5 +1,8 @@
 package view;
 
+import model.Project;
+import model.Task;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -21,10 +24,6 @@ public class PmJList<T> extends JList<T> {
         super(list);
         this.list = list;
         Color color = new Color(105,105,105);
-//        LineBorder line = new LineBorder(Color.BLACK, 2);
-//        TitledBorder title = new TitledBorder(line, name);
-//        title.setTitleJustification(TitledBorder.CENTER);
-//        super.setBorder(title);
         super.setBackground(color);
         super.setSelectionBackground(Color.YELLOW);
         super.setSelectionMode(SINGLE_SELECTION);
@@ -48,7 +47,7 @@ public class PmJList<T> extends JList<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: 1/27/2020 show property of task
-                System.out.println(PmJList.super.getSelectedIndex());
+                new TaskView((Task)PmJList.super.getSelectedValuesList().get(PmJList.super.getSelectedIndex()));
             }
         });
         popupMenu.add(addTeam);
@@ -60,7 +59,20 @@ public class PmJList<T> extends JList<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: 1/27/2020 show property of teamMember
-                System.out.println(PmJList.super.getSelectedIndex());
+
+            }
+        });
+        popupMenu.add(addTeam);
+    }
+
+    void addSetPercentageToPopUp() {
+        JMenuItem addTeam = new JMenuItem("Set Percentage");
+        addTeam.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddPercentage((Task) PmJList.super.getSelectedValuesList().get(
+                        PmJList.super.getSelectedIndex()
+                ));
             }
         });
         popupMenu.add(addTeam);
@@ -71,19 +83,35 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/27/2020 create team
-                System.out.println(PmJList.super.getSelectedIndex());
+                AddTeam addTeam = new AddTeam((Project) PmJList.super.getSelectedValuesList().get(
+                        PmJList.super.getSelectedIndex()
+                ));
             }
         });
         popupMenu.add(addTeam);
     }
 
-    void addTeamMemberToPopUp(){
+    void addAssignTaskToPopUp() {
+        JMenuItem addTeam = new JMenuItem("Add team");
+        addTeam.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AssignTask assignTask = new AssignTask((Task) PmJList.super.getSelectedValuesList().get(
+                        PmJList.super.getSelectedIndex()
+                ));
+            }
+        });
+        popupMenu.add(addTeam);
+    }
+
+    void addAddTeamMemberToPopUp(){
         JMenuItem addTeam = new JMenuItem("Add Team member");
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/27/2020 create teamMember
+                // TODO: 1/28/2020 get all team of project from database
+//                AddUserToTeam addUserToTeam = new AddUserToTeam();
+
             }
         });
         popupMenu.add(addTeam);
