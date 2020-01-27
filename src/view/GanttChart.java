@@ -63,6 +63,8 @@ public class GanttChart extends JFrame{
         getContentPane().add(chartPanel);
     }
 
+
+
     private IntervalCategoryDataset createCategoryDataset() {
         TaskSeries series = new TaskSeries("Tasks");
 

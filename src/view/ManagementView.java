@@ -88,13 +88,6 @@ public class ManagementView extends JFrame{
         teamMemberJList.setPreferredSize(listDimension);
         teamMemberJList.setSize(listDimension);
 
-
-//        teamJList.setBounds(0, 0, listDimension.width, listDimension.height);
-//        teamMemberJList.setBounds(listDimension.width, 0, listDimension.width, listDimension.height);
-//        todo.setBounds(2*listDimension.width,0, listDimension.width, listDimension.height);
-//        doing.setBounds(3*listDimension.width, 0, listDimension.width, listDimension.height);
-//        done.setBounds(4*listDimension.width, 0, listDimension.width, listDimension.height);
-
         todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
         teamJList.addTeamToPopUp();
         teamMemberJList.addTeamMemberPropertyToPopUp();teamMemberJList.addTeamMemberToPopUp();
