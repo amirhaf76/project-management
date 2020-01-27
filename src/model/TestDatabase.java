@@ -6,7 +6,7 @@ public class TestDatabase {
         Database database = new Database();
         //create all tables
         database.createTables();
-        //GUI all insertion queries
+        //test all insertion queries
         database.insertIntoUser("hosein", "123456", "hosein@gmail.com", "09123273259");
         database.insertIntoProject("JDM", "hadafe in proje .......... mibashad", 1);
         database.insertIntoTeam("alpha", 1);
@@ -16,38 +16,38 @@ public class TestDatabase {
         database.insertIntoComment("hi", 1, 1);
         database.insertIntoTaskDependency(1, 2);
 
-        //login validation GUI
+        //login validation test
         System.out.println(database.checkUserValidation("hosein", "123456"));
 
-        //select all project GUI by user id
+        //select all project test by user id
         database.selectAllproject(1);
 
-        //GUI user is manager or not
+        //test user is manager or not
         System.out.println(database.userIsManager(1, 2));
 
-        //GUI update bio
+        //test update bio
         database.updateBioOfUser(1, "salam man hosein am");
-        //GUI update percentage of tasks
+        //test update percentage of tasks
         database.updatePercentageOfTask(2, 100);
 
-        //GUI select tasks
+        //test select tasks
         database.selectAllTasks(1);
-        //GUI select to do tasks
+        //test select to do tasks
         database.selectToDoTasks(1);
-        //GUI select doing tasks
+        //test select doing tasks
         database.selectDoingTasks(1);
-        //GUI select done tasks
+        //test select done tasks
         database.selectDoneTasks(1);
 
-        //GUI select comments of task
+        //test select comments of task
         database.selectComments(1);
-        //GUI select teams of project
+        //test select teams of project
         database.selectTeams(1);
-        //GUI select user of project
+        //test select user of project
         database.selectUserOfproject(1);
-        //GUI select user of team
+        //test select user of team
         database.selectUserOfTeam(1);
-        //GUI select manager of project
+        //test select manager of project
         database.selectManagerOfProject(1);
     }
 }
