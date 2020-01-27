@@ -41,6 +41,7 @@ public class ProjectsView extends JFrame {
         // JLabel
         Dimension labelDimension = new Dimension (frameSize.width/3, frameSize.height /3);
         JLabel profile = new JLabel("Profile");
+        // TODO: 1/28/2020 get User from database
         JLabel username = new JLabel("username");
 
         profile.setPreferredSize(labelDimension);
@@ -146,6 +147,7 @@ public class ProjectsView extends JFrame {
 
 
     }
+
 
     public void updateProjectView(){
         // TODO: 1/27/2020 get list of project from database
