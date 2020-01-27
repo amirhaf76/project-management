@@ -315,6 +315,40 @@ public class Database {
         //close database connection
         close();
     }
+
+    /**
+     * update Task table assign to a team
+     * @param task_id
+     * @param team_id
+     * @throws Exception
+     */
+    public void updateTaskAssignToTeam(int task_id ,int team_id) throws Exception {
+        //update bio query with user id
+        connectToDatabase();
+        String sql = "UPDATE Task SET assignedTeam_id ='" + team_id + "'WHERE task_id =" + task_id;
+        statement.executeUpdate( sql);
+
+        //close database connection
+        close();
+
+
+    }
+
+    /**
+     * update Task table assign to a team member
+     * @param task_id
+     * @param user_id
+     * @throws Exception
+     */
+    public void updateTaskAssignToTeamMember(int task_id ,int user_id) throws Exception {
+        //update bio query with user id
+        connectToDatabase();
+        String sql = "UPDATE Task SET assignedTeamMember_id ='" + user_id + "'WHERE task_id =" + task_id;
+        statement.executeUpdate( sql);
+
+        //close database connection
+        close();
+    }
     //************************************select queries
     /**
      * this function check user validation for login
