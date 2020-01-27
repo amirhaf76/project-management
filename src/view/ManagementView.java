@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class ManagementView extends JFrame{
 
     private User user;
-    private ArrayList<Task> tasks;
-    private ArrayList<Team> teams;
-    private ArrayList<TeamMember> teamMembers;
+    private static ArrayList<Task> tasks;
+    private static ArrayList<Team> teams;
+    private static ArrayList<TeamMember> teamMembers;
     private GanttChart ganttChart;
 
 
@@ -248,28 +248,28 @@ public class ManagementView extends JFrame{
         this.user = user;
     }
 
-    public ArrayList<Task> getTasks() {
+    public static ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public static void setTasks(ArrayList<Task> tasks) {
+        ManagementView.tasks = tasks;
     }
 
-    public ArrayList<Team> getTeams() {
+    public static ArrayList<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(ArrayList<Team> teams) {
-        this.teams = teams;
+    public static void setTeams(ArrayList<Team> teams) {
+        ManagementView.teams = teams;
     }
 
-    public ArrayList<TeamMember> getTeamMembers() {
+    public static ArrayList<TeamMember> getTeamMembers() {
         return teamMembers;
     }
 
-    public void setTeamMembers(ArrayList<TeamMember> teamMembers) {
-        this.teamMembers = teamMembers;
+    public static void setTeamMembers(ArrayList<TeamMember> teamMembers) {
+        ManagementView.teamMembers = teamMembers;
     }
 
     public GanttChart getGanttChart() {
