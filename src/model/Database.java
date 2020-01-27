@@ -1,5 +1,3 @@
-package model;
-
 /**
  * this is database class
  * this class includes all needed functions
@@ -9,6 +7,10 @@ package model;
 import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Database {
     private  Connection connect = null;
@@ -426,7 +428,11 @@ public class Database {
             String task_name = rs.getString(2);
             String task_description = rs.getString(3);
             String startTime = rs.getString(4);
+            DateTimeFormatter formater1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime startdatetime = LocalDateTime.parse(startTime,formater1);
             String endTime = rs.getString(5);
+            LocalDateTime enddatetime = LocalDateTime.parse(endTime,formater1);
+
             int assignedTeamMember_id  = rs.getInt(6);
             int assignedTeam_id  = rs.getInt(7);
 
@@ -435,8 +441,22 @@ public class Database {
             System.out.print(", task_id: " + task_id);
             System.out.print(", task_name: " + task_name);
             System.out.print(", task_description: " + task_description);
-            System.out.print(", startTime: " + startTime);
-            System.out.print(", endTime: " + endTime);
+            System.out.print(", startTime: " + startdatetime);
+            System.out.println();
+            System.out.println(startdatetime.getYear());
+            System.out.println(startdatetime.getMonthValue());
+            System.out.println(startdatetime.getDayOfMonth());
+            System.out.println(startdatetime.getHour());
+            System.out.println(startdatetime.getMinute());
+            System.out.println(startdatetime.getSecond());
+            System.out.println();
+            System.out.println(", endTime: " + enddatetime);
+            System.out.println(enddatetime.getYear());
+            System.out.println(enddatetime.getMonthValue());
+            System.out.println(enddatetime.getDayOfMonth());
+            System.out.println(enddatetime.getHour());
+            System.out.println(enddatetime.getMinute());
+            System.out.println(enddatetime.getSecond());
             System.out.print(", assignedTeamMember_id: " + assignedTeamMember_id);
             System.out.println(", assignedTeam_id: " + assignedTeam_id);
         }
