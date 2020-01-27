@@ -1,10 +1,13 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /** @noinspection ALL*/
 public class SignUp extends JFrame{
@@ -30,14 +33,19 @@ public class SignUp extends JFrame{
         grid.fill = GridBagConstraints.HORIZONTAL;
         grid.weightx = 1;
         grid.weighty = 1;
+//        grid.anchor = GridBagConstraints.CENTER;
 
         frame.setResizable(false);
         frame.setVisible(true);
 
+
+        JLayeredPane lp = frame.getLayeredPane();
 //        try {
 //            Image image = ImageIO.read(new File("F:\\Amir\\pdf\\Software Engineering\\ProjectManagement\\DSC100256920.jpg"));
 //            JLabel backGround = new JLabel( new ImageIcon(image.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//            frame.add(backGround);
+//            backGround.setBounds(0,0, frame.getWidth(),frame.getHeight());
+//            lp.add(backGround, -1);
+//
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }

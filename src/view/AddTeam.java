@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /** @noinspection ALL*/
 public class AddTeam extends JFrame {
 
-    private static JTextField teamName = new JTextField(16);
+    private JTextField teamName = new JTextField(16);
 
     public AddTeam() {
         super("Add Team");
@@ -57,15 +57,6 @@ public class AddTeam extends JFrame {
         Dimension fieldDimension = new Dimension(3 * frame.getWidth()/5, frame.getHeight()/5);
 
         teamName.setBounds(labelDimension.width, 0, fieldDimension.width, fieldDimension.height);
-//        teamName.setPreferredSize(fieldDimension);
-//        emailField.setPreferredSize(fieldDimension);
-//        passwordField.setPreferredSize(fieldDimension);
-//        phoneField.setPreferredSize(fieldDimension);
-//
-//        teamName.setVisible(true);
-//        emailField.setVisible(true);
-//        passwordField.setVisible(true);
-//        phoneField.setVisible(true);
 
         grid.gridwidth = 4;
         grid.gridheight = 1;
@@ -97,11 +88,11 @@ public class AddTeam extends JFrame {
 
     }
 
-    public static JTextField getTeamName() {
+    public JTextField getTeamName() {
         return teamName;
     }
 
-    public static void setTeamName(JTextField teamName) {
-        AddTeam.teamName = teamName;
+    public void setTeamName(JTextField teamName) {
+        this.teamName = teamName;
     }
 }
