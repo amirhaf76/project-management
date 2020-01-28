@@ -779,6 +779,28 @@ public class Database {
         close();
     }
 
+
+    public boolean checkTaskDependency(int task_id) throws Exception {
+        connectToDatabase();
+        boolean res = false;
+
+        //select all the tasks of a project with id =  project_id
+        String sql = "SELECT * FROM TaskDependency taskD , Task task WHERE taskD.reference = task.task_id and" +
+                " task.percentage <> 100";
+
+        ResultSet rs = statement.executeQuery( sql);
+        //Extract data from result set
+        while(rs.next()){
+            //Retrieve by column name
+            int task  = rs.getInt(1);
+            if(task == task_id)
+                res = true;
+        }
+        //close database connection
+        close();
+        return res;
+    }
+
     //close database connection
     private void close() {
         try {
