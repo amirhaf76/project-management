@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import org.jfree.data.category.CategoryRangeInfo;
 
 import javax.swing.*;
@@ -68,6 +69,13 @@ public class CreateProject extends JFrame{
                 if (!projectName.getText().equals("")) {
 
                     // TODO: 1/27/2020 create Project and send it to database
+                    Controller controller = new Controller();
+                    try {
+                        controller.sendProjectDataToDb(projectName.getText(), "", 1);
+                        // TODO: 1/28/2020 doit
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     ProjectsView.updateProjectView();
                     CreateProject.super.setVisible(false);
                 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Project;
 
 import javax.swing.*;
@@ -62,7 +63,12 @@ public class AddTeam extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!teamName.getText().equals("")) {
-
+                    Controller controller = new Controller();
+                    try {
+                        controller.sendTeamDataToDb(teamName.getText(), project.getId());
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     // TODO: 1/25/2020 create team and send it to database
 
                     AddTeam.super.setVisible(false);

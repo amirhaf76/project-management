@@ -1,5 +1,7 @@
 package view;
 
+import controller.*;
+import model.User;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +18,7 @@ public class Login extends JFrame{
 
     private JTextField usernameField = new JTextField(16);
     private JPasswordField passwordField = new JPasswordField(16);
+    private static User user;
 
     public Login() {
         super("Login");
@@ -76,18 +79,24 @@ public class Login extends JFrame{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Controller contoller = new Controller();
                 // TODO: 1/25/2020 check user from database
-//                if () {
-                    Login.super.setVisible(false);
-                    ProjectsView projectsView = new ProjectsView();
-
-//                }
-//                else {
-//                    javax.swing.JOptionPane.showMessageDialog(null ,
-//                            "Your username or Your password is wrong !",
-//                            "Error", JOptionPane.ERROR_MESSAGE);
-//                }
+                try {
+                    if (contoller.checkUserValidation(usernameField.getText(), passwordField.getText())) {
+                        Login.super.setVisible(false);
+                        ProjectsView projectsView = new ProjectsView();
+                        contoller.fetchUserFromDb(usernameField.getText());
+                        projectsView.setUser(user);
+                        projectsView.setText();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null ,
+                                "Your username or Your password is wrong !",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
 
 
             }
@@ -115,4 +124,27 @@ public class Login extends JFrame{
         super.setVisible(true);
     }
 
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
+    public void setUsernameField(JTextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        Login.user = user;
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import model.User;
 import view.com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -10,10 +11,31 @@ import java.awt.event.ActionListener;
 /** @noinspection ALL*/
 public class Profile extends JFrame {
 
+    private JLabel email1 = new JLabel("emial");
+    private JLabel title1 = new JLabel("Username:");
+    private JLabel phoneNumber1 = new JLabel("phoneNumber");
+    private JTextField bio1 = new JTextField();
+
+
+    private User user;
     public Profile() {
         super("Profile");
         createGUI();
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        email1.setText(user.getEmail());
+        title1.setText(user.getUsername());
+        phoneNumber1.setText(user.getPhoneNumber());
+        bio1.setText(user.getBio());
+        super.validate();
+    }
+
     private void createGUI() {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
@@ -33,25 +55,25 @@ public class Profile extends JFrame {
         //JLable
         Dimension labelDimension = new Dimension(frameSize.width/3, frameSize.height/3);
         JLabel title = new JLabel("Username:");
-        JLabel state = new JLabel("emial");
-        JLabel percentage = new JLabel("phoneNumber");
-        JLabel username = new JLabel("bio");
-        JLabel start = new JLabel("bio");
+        JLabel email = new JLabel("emial");
+        JLabel phoneNumber = new JLabel("phoneNumber");
+        JLabel bio = new JLabel("bio");
+
 
         title.setPreferredSize(labelDimension);
-        state.setPreferredSize(labelDimension);
-        percentage.setPreferredSize(labelDimension);
-        start.setPreferredSize(labelDimension);
-
+        email.setPreferredSize(labelDimension);
+        phoneNumber.setPreferredSize(labelDimension);
+        bio.setPreferredSize(labelDimension);
+        title1.setPreferredSize(labelDimension);
+        email1.setPreferredSize(labelDimension);
+        phoneNumber1.setPreferredSize(labelDimension);
         Dimension dimension = new Dimension(2 * frameSize.width / 3, 2 *frameSize.height / 3);
-        JTextField title1 = new JTextField();
-        JTextField state1 = new JTextField();
-        JTextField percentage1 = new JTextField();
 
-        title.setPreferredSize(dimension);
-        state.setPreferredSize(dimension);
-        percentage.setPreferredSize(dimension);
-        start.setPreferredSize(dimension);
+
+        bio1.setPreferredSize(dimension);
+
+
+
 
         JButton ok = new JButton("Ok");
         JButton cancel = new JButton("Cancel");
@@ -93,36 +115,24 @@ public class Profile extends JFrame {
 
         panel.add(title, grid);
         grid.gridy = 1;
-        panel.add(percentage, grid);
+        panel.add(phoneNumber, grid);
         grid.gridy = 2;
-        panel.add(state, grid);
+        panel.add(email, grid);
         grid.gridy = 3;
-        panel.add(start,grid);
-        grid.gridy = 4;
-        panel.add(startLine, grid);
-        grid.gridy = 5;
-        panel.add(end, grid);
-        grid.gridy = 6;
-        panel.add(deadLine, grid);
+        panel.add(bio,grid);
 
         grid.gridx = 1;
         grid.gridy = 0;
 
         panel.add(title1, grid);
         grid.gridy = 1;
-        panel.add(percentage1, grid);
+        panel.add(phoneNumber1, grid);
         grid.gridy = 2;
-        panel.add(state1, grid);
+        panel.add(email1, grid);
         grid.gridy = 3;
-        panel.add(startDate,grid);
-        grid.gridy = 4;
-        panel.add(startTime,grid);
-        grid.gridy = 5;
-        panel.add(endDate,grid);
-        grid.gridy = 6;
-        panel.add(endTime, grid);
+        panel.add(bio1,grid);
 
-        grid.gridy = 7;
+        grid.gridy = 4;
         grid.gridx = 0;
         grid.fill = GridBagConstraints.NONE;
         grid.anchor = GridBagConstraints.LAST_LINE_START;

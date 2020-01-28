@@ -9,15 +9,20 @@ package model;
 import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Database {
-    private  Connection connect = null;
-    private  Statement statement = null;
-    private  ResultSet resultSet = null;
-    private  PreparedStatement preparedStatement = null;
-    private  String url = "jdbc:mysql://localhost:3306/db_project_management";
-    private  String user = "root", pass = "";
-
+    private Connection connect = null;
+    private Statement statement = null;
+    private ResultSet resultSet = null;
+    private PreparedStatement preparedStatement = null;
+    private String url = "jdbc:mysql://localhost:3306/db_project_management";
+    private String user = "root", pass = "";
 
 
     // connect to our database
@@ -27,12 +32,13 @@ public class Database {
             connect = DriverManager.getConnection(url, user, pass);
             statement = connect.createStatement();
             // System.out.println("connected");
-        }catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     // create all tables
     public void createTables() throws Exception {
         //connect to database
@@ -48,7 +54,7 @@ public class Database {
                 " bio VARCHAR(2000) DEFAULT NULL , " +
                 " PRIMARY KEY ( user_id ))";
         //resultSet = statement.executeQuery( sql);
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create project table sql query
         sql = "CREATE TABLE Project " +
@@ -59,7 +65,7 @@ public class Database {
                 " PRIMARY KEY ( project_id ) , " +
                 " FOREIGN KEY ( manager_id ) REFERENCES User( user_id ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create team table sql query
         sql = "CREATE TABLE Team " +
@@ -69,7 +75,7 @@ public class Database {
                 " FOREIGN KEY ( project_id ) REFERENCES Project( project_id ) ," +
                 " PRIMARY KEY ( team_id ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create user_team table sql query that show us which user is in which team
         sql = "CREATE TABLE User_Team " +
@@ -79,7 +85,7 @@ public class Database {
                 " FOREIGN KEY ( user_id ) REFERENCES User( user_id ) ," +
                 " PRIMARY KEY ( team_id , user_id ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create Task table sql query
         sql = "CREATE TABLE Task " +
@@ -95,7 +101,7 @@ public class Database {
                 " FOREIGN KEY ( assignedTeam_id ) REFERENCES Team( team_id ) ," +
                 " PRIMARY KEY ( task_id ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create comment table sql query
         sql = "CREATE TABLE Comment " +
@@ -107,7 +113,7 @@ public class Database {
                 " FOREIGN KEY ( task_id ) REFERENCES Task( task_id ) ," +
                 " PRIMARY KEY ( comment_id ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //create task dependecy table that show us dependency between tasks
         sql = "CREATE TABLE TaskDependency " +
@@ -117,21 +123,23 @@ public class Database {
                 " FOREIGN KEY ( reference ) REFERENCES Task( task_id ) ," +
                 " PRIMARY KEY ( task_id , reference ))";
 
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         close();
     }
 
     //************************************Insert
+
     /**
      * insert into User table
+     *
      * @param username
      * @param password
      * @param email
      * @param phoneNumber
      * @throws Exception
      */
-    public void insertIntoUser(String username ,String password ,String email ,String phoneNumber) throws Exception {
+    public void insertIntoUser(String username, String password, String email, String phoneNumber) throws Exception {
         connectToDatabase();
 
         preparedStatement = connect.prepareStatement("insert into  User values (DEFAULT , ?, ? ,? ,? ,?)");
@@ -143,7 +151,6 @@ public class Database {
         preparedStatement.setString(5, null);
 
 
-
         preparedStatement.executeUpdate();
 
         //close database connection
@@ -152,12 +159,13 @@ public class Database {
 
     /**
      * insert into Project table
+     *
      * @param project_name
      * @param project_description
      * @param manager_id
      * @throws Exception
      */
-    public void insertIntoProject(String project_name ,String project_description ,int manager_id) throws Exception {
+    public void insertIntoProject(String project_name, String project_description, int manager_id) throws Exception {
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  Project values (default, ?, ? ,? )");
 
@@ -173,11 +181,12 @@ public class Database {
 
     /**
      * insert into Team table
+     *
      * @param team_name
      * @param project_id
      * @throws Exception
      */
-    public void insertIntoTeam(String team_name ,int project_id) throws Exception {
+    public void insertIntoTeam(String team_name, int project_id) throws Exception {
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  Team values (default, ?, ?)");
 
@@ -192,6 +201,7 @@ public class Database {
 
     /**
      * insert into Task table
+     *
      * @param task_name
      * @param task_description
      * @param startTime
@@ -200,8 +210,8 @@ public class Database {
      * @param assignedTeam_id
      * @throws Exception
      */
-    public void insertIntoTask(String task_name ,String task_description ,String startTime ,String endTime
-            ,int assignedTeamMember_id ,int assignedTeam_id) throws Exception {
+    public void insertIntoTask(String task_name, String task_description, String startTime, String endTime
+            , int assignedTeamMember_id, int assignedTeam_id) throws Exception {
         //open connection
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  Task values (default, ?, ? ,? ,? ,? ,? , DEFAULT)");
@@ -220,12 +230,13 @@ public class Database {
 
     /**
      * insert into Comment table
+     *
      * @param text
      * @param user_id
      * @param task_id
      * @throws Exception
      */
-    public void insertIntoComment(String text ,int user_id ,int task_id) throws Exception {
+    public void insertIntoComment(String text, int user_id, int task_id) throws Exception {
         //open connection
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  Comment values (default, ?, ? ,?)");
@@ -241,11 +252,12 @@ public class Database {
 
     /**
      * insert into User_Team table
+     *
      * @param user_id
      * @param team_id
      * @throws Exception
      */
-    public void insertIntoUser_Team(int user_id ,int team_id) throws Exception {
+    public void insertIntoUser_Team(int user_id, int team_id) throws Exception {
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  User_Team values (? ,?)");
 
@@ -259,11 +271,12 @@ public class Database {
 
     /**
      * insert into TaskDependency table
+     *
      * @param task_id1
      * @param task_id2
      * @throws Exception
      */
-    public void insertIntoTaskDependency(int task_id1 ,int task_id2) throws Exception {
+    public void insertIntoTaskDependency(int task_id1, int task_id2) throws Exception {
         //open connection
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  TaskDependency values (?, ?)");
@@ -279,18 +292,20 @@ public class Database {
 
 
     //************************************update queries
+
     /**
      * update percentage of task
+     *
      * @param task_id
      * @param percentage
      * @throws Exception
      */
-    public void updatePercentageOfTask(int task_id ,int percentage) throws Exception {
+    public void updatePercentageOfTask(int task_id, int percentage) throws Exception {
         //open connection
         connectToDatabase();
         //update percentage query with task id
         String sql = "UPDATE Task SET percentage ='" + percentage + "'WHERE task_id =" + task_id;
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
 
         //close database connection
         close();
@@ -298,27 +313,66 @@ public class Database {
 
     /**
      * update profile(bio)
+     *
      * @param user_id
      * @param bio
      * @throws Exception
      */
-    public void updateBioOfUser(int user_id , String bio) throws Exception {
+    public void updateBioOfUser(int user_id, String bio) throws Exception {
         //update bio query with user id
         connectToDatabase();
         String sql = "UPDATE User SET bio ='" + bio + "'WHERE user_id =" + user_id;
-        statement.executeUpdate( sql);
+        statement.executeUpdate(sql);
+
+        //close database connection
+        close();
+    }
+
+    /**
+     * update Task table assign to a team
+     *
+     * @param task_id
+     * @param team_id
+     * @throws Exception
+     */
+    public void updateTaskAssignToTeam(int task_id, int team_id) throws Exception {
+        //update bio query with user id
+        connectToDatabase();
+        String sql = "UPDATE Task SET assignedTeam_id ='" + team_id + "'WHERE task_id =" + task_id;
+        statement.executeUpdate(sql);
+
+        //close database connection
+        close();
+
+
+    }
+
+    /**
+     * update Task table assign to a team member
+     *
+     * @param task_id
+     * @param user_id
+     * @throws Exception
+     */
+    public void updateTaskAssignToTeamMember(int task_id, int user_id) throws Exception {
+        //update bio query with user id
+        connectToDatabase();
+        String sql = "UPDATE Task SET assignedTeamMember_id ='" + user_id + "'WHERE task_id =" + task_id;
+        statement.executeUpdate(sql);
 
         //close database connection
         close();
     }
     //************************************select queries
+
     /**
      * this function check user validation for login
      * and return TRUE if that is valid else return false
-     * @param username  entered by user as username
+     *
+     * @param username entered by user as username
      * @param password entered by user as password
      */
-    public boolean checkUserValidation(String username , String password) throws Exception {
+    public boolean checkUserValidation(String username, String password) throws Exception {
         //if user exist and pass is correct res -> TRUE else -> FALSE
         Boolean res = false;
         //open connection
@@ -333,8 +387,7 @@ public class Database {
             String pass = rs.getString(2);
 
             //check with every row
-            if(user.equals(username) && pass.equals(password))
-            {
+            if (user.equals(username) && pass.equals(password)) {
                 res = true;
                 break;
             }
@@ -344,28 +397,58 @@ public class Database {
         return res;
     }
 
+
+
+    //TODO: selectUserFromUsername
+    /*public User selectUserFromUsername(String username) throws Exception {
+        //if user exist and pass is correct res -> TRUE else -> FALSE
+        Boolean res = false;
+        //open connection
+        connectToDatabase();
+
+        String sql = "SELECT * FROM User u WHERE u.username="+username;
+        ResultSet rs = statement.executeQuery(sql);
+        //Extract data from result set
+        while (rs.next()) {
+            //Retrieve by column name
+            int userId = rs.getInt()
+            String user = rs.getString(1);
+            String pass = rs.getString(2);
+
+
+            //check with every row
+            if (user.equals(username) && pass.equals(password)) {
+                res = true;
+                break;
+            }
+        }
+        //close database connection
+        close();
+        return res;
+    }*/
+
     /**
      * check that user is manager or not
+     *
      * @param project_id
      * @param user_id
      * @return
      * @throws Exception
      */
-    public boolean userIsManager(int project_id , int user_id) throws Exception {
+    public boolean userIsManager(int project_id, int user_id) throws Exception {
         boolean res = false;
         connectToDatabase();
 
         //select projects that user is project manager
         //select projects that user is a team member
-        String sql = "SELECT manager_id FROM Project WHERE project_id = "+ project_id;
+        String sql = "SELECT manager_id FROM Project WHERE project_id = " + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int manager_id  = rs.getInt("manager_id");
-            if(manager_id == user_id)
-            {
+            int manager_id = rs.getInt("manager_id");
+            if (manager_id == user_id) {
                 res = true;
                 break;
             }
@@ -377,26 +460,33 @@ public class Database {
 
     /**
      * select all projects that user is joined
+     *
      * @param us_id
      * @throws Exception
      */
-    public void selectAllproject(int us_id) throws Exception {
+    public ArrayList<Project> selectAllproject(int us_id) throws Exception {
         connectToDatabase();
 
         //select projects that user is project manager
         //select projects that user is a team member
-        String sql = "SELECT project_id , project_name, project_description FROM Project WHERE manager_id ='"+ us_id +"' " +
+        String sql = "SELECT project_id , project_name, project_description FROM Project WHERE manager_id ='" + us_id + "' " +
                 "UNION " +
                 "SELECT p.project_id , p.project_name, p.project_description FROM team t ,User_team ut ,Project p" +
                 " WHERE t.team_id = ut.team_id and p.project_id = t.project_id and ut.user_id =" + us_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        ArrayList<Project> projects = new ArrayList();
+        while (rs.next()) {
             //Retrieve by column name
-            int project_id  = rs.getInt("project_id");
+            int project_id = rs.getInt("project_id");
             String project_name = rs.getString("project_name");
             String project_description = rs.getString("project_description");
+            Project project = new Project();
+            project.setId(rs.getInt("project_id"));
+            project.setName(rs.getString("project_name"));
+            project.setDescription(project_description = rs.getString("project_description"));
+            projects.add(project);
 
             //Display values
             System.out.print(", id: " + project_id);
@@ -405,49 +495,74 @@ public class Database {
         }
         //close database connection
         close();
+        return projects;
     }
+
+
 
     /**
      * select all the tasks of a project with id =  project_id
+     *
      * @param project_id
      * @throws Exception
      */
-    public void selectAllTasks(int project_id) throws Exception {
+    public ArrayList<Task> selectAllTasks(int project_id) throws Exception {
         connectToDatabase();
 
         //select all the tasks of a project with id =  project_id
-        String sql = "SELECT * FROM Task task , Team team WHERE task.assignedTeam_id = team.team_id and project_id ="+ project_id;
+        String sql = "SELECT * FROM Task task , Team team WHERE task.assignedTeam_id = team.team_id and project_id =" + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        ArrayList<Task> tasks = new ArrayList();
+        while (rs.next()) {
             //Retrieve by column name
-            int task_id  = rs.getInt(1);
+            int task_id = rs.getInt(1);
             String task_name = rs.getString(2);
             String task_description = rs.getString(3);
             String startTime = rs.getString(4);
+            DateTimeFormatter formater1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime startdatetime = LocalDateTime.parse(startTime, formater1);
             String endTime = rs.getString(5);
-            int assignedTeamMember_id  = rs.getInt(6);
-            int assignedTeam_id  = rs.getInt(7);
+            LocalDateTime enddatetime = LocalDateTime.parse(endTime, formater1);
 
+            int assignedTeamMember_id = rs.getInt(6);
+            int assignedTeam_id = rs.getInt(7);
+
+            Task task = new Task(task_name, startdatetime, enddatetime);
+            tasks.add(task);
 
             //Display values
             System.out.print(", task_id: " + task_id);
             System.out.print(", task_name: " + task_name);
             System.out.print(", task_description: " + task_description);
-            System.out.print(", startTime: " + startTime);
-            System.out.print(", endTime: " + endTime);
+            System.out.print(", startTime: " + startdatetime);
+            System.out.println();
+            System.out.println(startdatetime.getYear());
+            System.out.println(startdatetime.getMonthValue());
+            System.out.println(startdatetime.getDayOfMonth());
+            System.out.println(startdatetime.getHour());
+            System.out.println(startdatetime.getMinute());
+            System.out.println(startdatetime.getSecond());
+            System.out.println();
+            System.out.println(", endTime: " + enddatetime);
+            System.out.println(enddatetime.getYear());
+            System.out.println(enddatetime.getMonthValue());
+            System.out.println(enddatetime.getDayOfMonth());
+            System.out.println(enddatetime.getHour());
+            System.out.println(enddatetime.getMinute());
+            System.out.println(enddatetime.getSecond());
             System.out.print(", assignedTeamMember_id: " + assignedTeamMember_id);
             System.out.println(", assignedTeam_id: " + assignedTeam_id);
         }
         //close database connection
         close();
+        return tasks;
     }
-
-
 
     /**
      * select "to do" tasks of a project with id =  project_id with
+     *
      * @param project_id
      * @throws Exception
      */
@@ -456,19 +571,19 @@ public class Database {
 
         //select all the tasks of a project with id =  project_id
         String sql = "SELECT * FROM Task task , Team team WHERE task.assignedTeam_id = team.team_id and" +
-                " task.percentage  = 0 and project_id ="+ project_id;
+                " task.percentage  = 0 and project_id =" + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int task_id  = rs.getInt(1);
+            int task_id = rs.getInt(1);
             String task_name = rs.getString(2);
             String task_description = rs.getString(3);
             String startTime = rs.getString(4);
             String endTime = rs.getString(5);
-            int assignedTeamMember_id  = rs.getInt(6);
-            int assignedTeam_id  = rs.getInt(7);
+            int assignedTeamMember_id = rs.getInt(6);
+            int assignedTeam_id = rs.getInt(7);
 
 
             //Display values
@@ -483,8 +598,10 @@ public class Database {
         //close database connection
         close();
     }
+
     /**
      * select "Doing" tasks of a project with id =  project_id with
+     *
      * @param project_id
      * @throws Exception
      */
@@ -493,19 +610,19 @@ public class Database {
 
         //select all the tasks of a project with id =  project_id
         String sql = "SELECT * FROM Task task , Team team WHERE task.assignedTeam_id = team.team_id and" +
-                " task.percentage  <> 0 and task.percentage <> 100 and project_id ="+ project_id;
+                " task.percentage  <> 0 and task.percentage <> 100 and project_id =" + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int task_id  = rs.getInt(1);
+            int task_id = rs.getInt(1);
             String task_name = rs.getString(2);
             String task_description = rs.getString(3);
             String startTime = rs.getString(4);
             String endTime = rs.getString(5);
-            int assignedTeamMember_id  = rs.getInt(6);
-            int assignedTeam_id  = rs.getInt(7);
+            int assignedTeamMember_id = rs.getInt(6);
+            int assignedTeam_id = rs.getInt(7);
 
 
             //Display values
@@ -523,6 +640,7 @@ public class Database {
 
     /**
      * select "Done" tasks of a project with id =  project_id with
+     *
      * @param project_id
      * @throws Exception
      */
@@ -531,19 +649,19 @@ public class Database {
 
         //select all the tasks of a project with id =  project_id
         String sql = "SELECT * FROM Task task , Team team WHERE task.assignedTeam_id = team.team_id and" +
-                " task.percentage  = 100 and project_id ="+ project_id;
+                " task.percentage  = 100 and project_id =" + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int task_id  = rs.getInt(1);
+            int task_id = rs.getInt(1);
             String task_name = rs.getString(2);
             String task_description = rs.getString(3);
             String startTime = rs.getString(4);
             String endTime = rs.getString(5);
-            int assignedTeamMember_id  = rs.getInt(6);
-            int assignedTeam_id  = rs.getInt(7);
+            int assignedTeamMember_id = rs.getInt(6);
+            int assignedTeam_id = rs.getInt(7);
 
 
             //Display values
@@ -561,6 +679,7 @@ public class Database {
 
     /**
      * select all comment of task with task_id
+     *
      * @param task_id
      * @throws Exception
      */
@@ -570,13 +689,13 @@ public class Database {
         //select all the comments of a task with id =  task_id
         String sql = "SELECT * FROM Comment WHERE task_id =" + task_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int comment_id  = rs.getInt(1);
+            int comment_id = rs.getInt(1);
             String text = rs.getString(2);
-            int user_id  = rs.getInt(3);
+            int user_id = rs.getInt(3);
 
             //Display values
             System.out.print(", comment_id: " + comment_id);
@@ -589,6 +708,7 @@ public class Database {
 
     /**
      * select all teamms of project with project_id
+     *
      * @param project_id
      * @throws Exception
      */
@@ -599,11 +719,11 @@ public class Database {
         String sql = "SELECT * FROM Team WHERE project_id =" + project_id;
 
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int team_id  = rs.getInt(1);
+            int team_id = rs.getInt(1);
             String team_name = rs.getString(2);
 
             //Display values
@@ -613,29 +733,32 @@ public class Database {
         //close database connection
         close();
     }
+
     /**
      * select users of project with project_id
+     *
      * @param project_id
      * @throws Exception
      */
-    public void selectUserOfproject(int project_id) throws Exception {
+    public ArrayList<TeamMember> selectUserOfproject(int project_id) throws Exception {
         connectToDatabase();
 
         //select all the comments of a task with id =  task_id
-        String sql =   "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM team t ,User_team ut , User u,Project p" +
+        String sql = "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM team t ,User_team ut , User u,Project p" +
                 " WHERE t.team_id = ut.team_id and p.project_id = t.project_id and ut.user_id = u.user_id and p.project_id =" + project_id;
-
-        ResultSet rs = statement.executeQuery( sql);
+        ArrayList<TeamMember> users = new ArrayList();
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int user_id  = rs.getInt(1);
+            int user_id = rs.getInt(1);
             String username = rs.getString(2);
             String password = rs.getString(3);
             String email = rs.getString(4);
             String phoneNumber = rs.getString(5);
             String bio = rs.getString(6);
 
+            users.add(new TeamMember(new User(username, password, email, phoneNumber)));
 
             //Display values
             System.out.print(", user_id: " + user_id);
@@ -648,10 +771,12 @@ public class Database {
         }
         //close database connection
         close();
+        return users;
     }
 
     /**
      * select users of team with team_id (team members)
+     *
      * @param team_id
      * @throws Exception
      */
@@ -659,14 +784,14 @@ public class Database {
         connectToDatabase();
 
         //select all the comments of a task with id =  task_id
-        String sql =   "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM User_team ut , User u" +
+        String sql = "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM User_team ut , User u" +
                 " WHERE ut.user_id = u.user_id and ut.team_id =" + team_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int user_id  = rs.getInt(1);
+            int user_id = rs.getInt(1);
             String username = rs.getString(2);
             String password = rs.getString(3);
             String email = rs.getString(4);
@@ -688,29 +813,31 @@ public class Database {
 
     /**
      * select manager of project details with project_id
+     *
      * @param project_id
      * @return
      * @throws Exception
      */
-    public void selectManagerOfProject(int project_id) throws Exception {
+    public Manager selectManagerOfProject(int project_id) throws Exception {
         connectToDatabase();
 
         //select projects that user is project manager
         //select projects that user is a team member
-        String sql =   "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM Project p , User u" +
+        String sql = "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM Project p , User u" +
                 " WHERE u.user_id = p.manager_id and p.project_id =" + project_id;
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        Manager manager= new Manager(new User());
+        while (rs.next()) {
             //Retrieve by column name
-            int user_id  = rs.getInt(1);
+            int user_id = rs.getInt(1);
             String username = rs.getString(2);
             String password = rs.getString(3);
             String email = rs.getString(4);
             String phoneNumber = rs.getString(5);
             String bio = rs.getString(6);
-
+            manager = new Manager(new User(username, password, email, phoneNumber));
             //Display values
             System.out.print(", user_id: " + user_id);
             System.out.print(", username: " + username);
@@ -721,7 +848,68 @@ public class Database {
         }
         //close database connection
         close();
+        return manager;
     }
+
+    /**
+     * check task dependencyand return a boolean
+     * @param task_id
+     * @return
+     * @throws Exception
+     */
+    public boolean checkTaskDependency(int task_id) throws Exception {
+        connectToDatabase();
+        boolean res = false;
+
+        //select all the tasks of a project with id =  project_id
+        String sql = "SELECT * FROM TaskDependency taskD , Task task WHERE taskD.reference = task.task_id and" +
+                " task.percentage <> 100";
+
+        ResultSet rs = statement.executeQuery( sql);
+        //Extract data from result set
+        while(rs.next()){
+            //Retrieve by column name
+            int task  = rs.getInt(1);
+            if(task == task_id)
+                res = true;
+        }
+        //close database connection
+        close();
+        return res;
+    }
+    public User  selectUser(String usnaeme) throws Exception {
+        connectToDatabase();
+
+        //select all the comments of a task with id =  task_id
+        String sql = "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM User u WHERE u.username =" + usnaeme;
+
+        ResultSet rs = statement.executeQuery(sql);
+        //Extract data from result set
+        User user = new User();
+        while (rs.next()) {
+            //Retrieve by column name
+            int user_id = rs.getInt(1);
+            String username = rs.getString(2);
+            String password = rs.getString(3);
+            String email = rs.getString(4);
+            String phoneNumber = rs.getString(5);
+            String bio = rs.getString(6);
+
+            user = new User(username,password,email,phoneNumber);
+            //Display values
+            System.out.print(", user_id: " + user_id);
+            System.out.print(", username: " + username);
+            System.out.print(", password: " + password);
+            System.out.print(", email: " + email);
+            System.out.print(", phoneNumber: " + phoneNumber);
+            System.out.println(", bio: " + bio);
+
+        }
+        //close database connection
+        close();
+        return user;
+    }
+
 
     //close database connection
     private void close() {

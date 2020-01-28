@@ -11,12 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.PrimitiveIterator;
 
 /** @noinspection ALL*/
 public class ProjectsView extends JFrame {
 
     private User user;
-    private static Project[] projects = new Project[0];
+    private  JLabel username = new JLabel("username");
+    private static ArrayList<Project> projects = new ArrayList<>();
 
     public ProjectsView(){
         super("Project View");
@@ -42,7 +45,7 @@ public class ProjectsView extends JFrame {
         Dimension labelDimension = new Dimension (frameSize.width/3, frameSize.height /3);
         JLabel profile = new JLabel("Profile");
 
-        JLabel username = new JLabel("username");
+
 
         profile.setPreferredSize(labelDimension);
         username.setPreferredSize(labelDimension);
@@ -51,16 +54,19 @@ public class ProjectsView extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2);
-                // TODO: 1/27/2020 open profile window
+                    Profile profile1 = new Profile();
+                    profile1.setUser(user);
             }
         });
 
 
 
         // JList
+        Project[] p = new Project[projects.size()];
+        projects.toArray(p);
         Dimension listDimension = new Dimension(frameSize.width, frameSize.height);
         PmJList<Project> projectPmJList = new PmJList<>("Project",
-                projects);
+                p);
         projectPmJList.setPreferredSize(listDimension);
 
         JScrollPane sp = new JScrollPane(projectPmJList);
@@ -163,11 +169,17 @@ public class ProjectsView extends JFrame {
         this.user = user;
     }
 
-    public static Project[] getProjects() {
+    public void setText() {
+        username.setText(user.getUsername());
+    }
+
+
+
+    public static ArrayList<Project> getProjects() {
         return projects;
     }
 
-    public static void setProjects(Project[] projects) {
+    public static void setProjects(ArrayList<Project> projects) {
         ProjectsView.projects = projects;
     }
 }

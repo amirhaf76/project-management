@@ -1,5 +1,7 @@
 package view;
 
+import controller.Controller;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -96,6 +98,7 @@ public class SignUp extends JFrame{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Controller controller = new Controller();
 
                 if (usernameField.getText().equals("") || passwordField.getText().equals("") ||
                 phoneField.getText().equals("") || emailField.getText().equals("") ) {
@@ -105,6 +108,14 @@ public class SignUp extends JFrame{
                 }
                 else {
                     // TODO: 1/25/2020 create user and send it to database
+                    try {
+                        controller.sendUserDataToDb(usernameField.getText(),
+                                passwordField.getText(),
+                                emailField.getText(),
+                                phoneField.getText());
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     SignUp.super.setVisible(false);
                 }
             }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Task;
 import model.Team;
 import model.TeamMember;
@@ -64,9 +65,9 @@ public class AssignTask extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!AssignTask.this.username.getText().equals("")) {
-
+                    Controller controller = new Controller();
+//                    controller.sendTaskAssignmentDataToDb();
                     // TODO: 1/25/2020 add teammember to the task in database
-
                     AssignTask.super.setVisible(false);
                 }
                 else {

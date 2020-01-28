@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Team;
 
 import javax.swing.*;
@@ -61,7 +62,12 @@ public class AddUserToTeam extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!AddUserToTeam.this.username.getText().equals("")) {
+                    Controller controller = new Controller();
+                    try {
 
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     // TODO: 1/25/2020 add team member to team and send it to database
 
                     AddUserToTeam.super.setVisible(false);
