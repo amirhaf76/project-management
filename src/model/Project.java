@@ -11,6 +11,8 @@ public class Project {
 
     private int id;
 
+    private String name;
+    private String description;
     private Manager manager;
     private ArrayList<Team> teams = new ArrayList<>();
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -64,13 +66,21 @@ public class Project {
         this.manager = manager;
     }
 
-//    public static int getBaseProjectId() {
-//        return baseProjectId;
-//    }
-//
-//    public static void setBaseProjectId(int baseProjectId) {
-//        Project.baseProjectId = baseProjectId;
-//    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     // TODO: 1/17/2020 ????
     public void createGaanttChart(){ }
