@@ -11,15 +11,15 @@ public class Project {
 
     private int id;
 
+    private String name;
+    private String description;
     private Manager manager;
     private ArrayList<Team> teams = new ArrayList<>();
     private ArrayList<Task> tasks = new ArrayList<>();
     private GanttChart ganttChart; // TODO: 1/16/2020 add ganttChart
 
-    public Project(Manager manager) {
+    public Project() {
         this.manager = manager;
-//        this.id = baseProjectId;
-//        baseProjectId++;
     }
 
     public void changeManger(Manager manager) {
@@ -42,6 +42,18 @@ public class Project {
         return tasks;
     }
 
+    public void setTeams(ArrayList<Team> teams) {
+        this.teams = teams;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setGanttChart(GanttChart ganttChart) {
+        this.ganttChart = ganttChart;
+    }
+
     public GanttChart getGanttChart() {
         return ganttChart;
     }
@@ -54,13 +66,21 @@ public class Project {
         this.manager = manager;
     }
 
-//    public static int getBaseProjectId() {
-//        return baseProjectId;
-//    }
-//
-//    public static void setBaseProjectId(int baseProjectId) {
-//        Project.baseProjectId = baseProjectId;
-//    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     // TODO: 1/17/2020 ????
     public void createGaanttChart(){ }

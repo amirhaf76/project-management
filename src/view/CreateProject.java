@@ -68,7 +68,7 @@ public class CreateProject extends JFrame{
                 if (!projectName.getText().equals("")) {
 
                     // TODO: 1/27/2020 create Project and send it to database
-                    projectsView.updateProjectView();
+                    ProjectsView.updateProjectView();
                     CreateProject.super.setVisible(false);
                 }
                 else {

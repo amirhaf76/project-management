@@ -99,10 +99,15 @@ public class ManagementView extends JFrame{
         teamMemberJList.setPreferredSize(listDimension);
         teamMemberJList.setSize(listDimension);
 
+        // TODO: 1/28/2020 if the user is manager
         todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
-        todo.addSetPercentageToPopUp();doing.addSetPercentageToPopUp();done.addSetPercentageToPopUp();
+        todo.addAssignTaskToPopUp();doing.addAssignTaskToPopUp();done.addAssignTaskToPopUp();
         teamJList.addTeamToPopUp();
         teamMemberJList.addAddTeamMemberToPopUp();
+
+        // TODO: 1/28/2020 else
+        todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
+        todo.addSetPercentageToPopUp();doing.addSetPercentageToPopUp();done.addSetPercentageToPopUp();
 
 
 

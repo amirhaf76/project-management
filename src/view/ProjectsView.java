@@ -98,7 +98,9 @@ public class ProjectsView extends JFrame {
         createProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateProject();
+
+                CreateProject vp = new CreateProject();
+
             }
         });
 
@@ -149,7 +151,7 @@ public class ProjectsView extends JFrame {
     }
 
 
-    public void updateProjectView(){
+    public static void updateProjectView(){
         // TODO: 1/27/2020 get list of project from database
     }
 

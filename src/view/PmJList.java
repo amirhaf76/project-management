@@ -85,7 +85,7 @@ public class PmJList<T> extends JList<T> {
     }
 
     void addAssignTaskToPopUp() {
-        JMenuItem addTeam = new JMenuItem("Add team");
+        JMenuItem addTeam = new JMenuItem("Assign Task");
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
