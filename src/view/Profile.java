@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Profile extends JFrame {
 
     public Profile() {
-        super("Create Task");
+        super("Profile");
         createGUI();
     }
     private void createGUI() {
@@ -32,36 +32,26 @@ public class Profile extends JFrame {
 
         //JLable
         Dimension labelDimension = new Dimension(frameSize.width/3, frameSize.height/3);
-        JLabel title = new JLabel("Title:");
-        JLabel state = new JLabel("State:");
-        JLabel percentage = new JLabel("Percentage:");
-        JLabel start = new JLabel("Start:");
-        JLabel startLine = new JLabel("Start Line:");
-        JLabel end = new JLabel("End:");
-        JLabel deadLine = new JLabel("Dead Line:");
+        JLabel title = new JLabel("Username:");
+        JLabel state = new JLabel("emial");
+        JLabel percentage = new JLabel("phoneNumber");
+        JLabel username = new JLabel("bio");
+        JLabel start = new JLabel("bio");
 
         title.setPreferredSize(labelDimension);
         state.setPreferredSize(labelDimension);
         percentage.setPreferredSize(labelDimension);
         start.setPreferredSize(labelDimension);
-        startLine.setPreferredSize(labelDimension);
-        end.setPreferredSize(labelDimension);
-        deadLine.setPreferredSize(labelDimension);
 
         Dimension dimension = new Dimension(2 * frameSize.width / 3, 2 *frameSize.height / 3);
         JTextField title1 = new JTextField();
         JTextField state1 = new JTextField();
         JTextField percentage1 = new JTextField();
-        JDateChooser startDate = new JDateChooser();
-        TimeGetter startTime = new TimeGetter(dimension);
-        JDateChooser endDate = new JDateChooser();
-        TimeGetter endTime = new TimeGetter(dimension);
 
         title.setPreferredSize(dimension);
         state.setPreferredSize(dimension);
         percentage.setPreferredSize(dimension);
         start.setPreferredSize(dimension);
-        end.setPreferredSize(dimension);
 
         JButton ok = new JButton("Ok");
         JButton cancel = new JButton("Cancel");
@@ -81,7 +71,7 @@ public class Profile extends JFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CreateTask.super.setVisible(false);
+                Profile.super.setVisible(false);
             }
         });
 

@@ -19,7 +19,6 @@ public class Project {
     private GanttChart ganttChart; // TODO: 1/16/2020 add ganttChart
 
     public Project() {
-        this.manager = manager;
     }
 
     public void changeManger(Manager manager) {
