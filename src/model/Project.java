@@ -42,6 +42,18 @@ public class Project {
         return tasks;
     }
 
+    public void setTeams(ArrayList<Team> teams) {
+        this.teams = teams;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setGanttChart(GanttChart ganttChart) {
+        this.ganttChart = ganttChart;
+    }
+
     public GanttChart getGanttChart() {
         return ganttChart;
     }

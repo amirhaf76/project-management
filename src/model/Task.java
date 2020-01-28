@@ -17,6 +17,7 @@ public class Task {
 
     private ArrayList<TaskComment> comments = new ArrayList<>();
     private ArrayList<TeamMember> teamMembers = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     private LocalDateTime start;
     private LocalDateTime end;
@@ -93,6 +94,10 @@ public class Task {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public void setDependency(Task task) {
+        // TODO: 1/28/2020 controller
     }
 
     public static int getBaseTaskId() {
