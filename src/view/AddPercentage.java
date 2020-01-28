@@ -63,6 +63,7 @@ public class AddPercentage extends JFrame {
                 if (!projectName.getText().equals("")) {
 
                     // TODO: 1/27/2020 update percentage in database
+
                     AddPercentage.super.setVisible(false);
                 }
                 else {

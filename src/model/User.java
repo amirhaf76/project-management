@@ -9,8 +9,11 @@ public class User {
     private String password;
     private String email;
     private String phoneNumber;
+    private String bio = "";
 
     private ArrayList<Project> projects = new ArrayList<>();
+
+    public User(){}
 
     public User(String username, String password, String email, String phoneNumber) {
         this.username = username;
@@ -58,6 +61,14 @@ public class User {
 
     public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     @Override

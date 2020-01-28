@@ -12,6 +12,9 @@ public class Team {
 
     private ArrayList<TeamMember> teamMembers = new ArrayList<>();
 
+    public Team() {
+
+    }
     public Team(String name) {
         this.name = name;
 //        this.teamId = baseTeamId;
