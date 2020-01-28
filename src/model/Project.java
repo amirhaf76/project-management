@@ -16,10 +16,8 @@ public class Project {
     private ArrayList<Task> tasks = new ArrayList<>();
     private GanttChart ganttChart; // TODO: 1/16/2020 add ganttChart
 
-    public Project(Manager manager) {
+    public Project() {
         this.manager = manager;
-//        this.id = baseProjectId;
-//        baseProjectId++;
     }
 
     public void changeManger(Manager manager) {
