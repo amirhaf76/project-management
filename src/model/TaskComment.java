@@ -6,9 +6,11 @@ public class TaskComment {
 
 //    private static int baseCommentId = 1;
 
-    private final User user;
+    private User user;
     private int id;
     private String text;
+
+    public TaskComment(){}
 
     public TaskComment(User user, String text) {
         this.user = user;
@@ -36,6 +38,10 @@ public class TaskComment {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     //    public static int getBaseCommentId() {

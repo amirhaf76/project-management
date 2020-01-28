@@ -8,6 +8,8 @@ public class TeamMember extends User {
 
     private int teamMemberId;
 
+    public TeamMember(){}
+
     public TeamMember(User user) {
         super(user.getUsername(),
                 user.getPassword(),
