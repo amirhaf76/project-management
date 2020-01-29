@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import model.Team;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 public class AddUserToTeam extends JFrame{
 
     private JTextField username = new JTextField(16);
+    private static User user;
 
     public AddUserToTeam(Team team) {
         super("Add User to team");
@@ -64,10 +66,13 @@ public class AddUserToTeam extends JFrame{
                 if (!AddUserToTeam.this.username.getText().equals("")) {
                     Controller controller = new Controller();
                     try {
+                        controller.fetchUserFromDbAddUserToTeam(username.getText());
+                        controller.sendMembershipDataToDb(user.getId(), team.getTeamId());
 
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
+
                     // TODO: 1/25/2020 add team member to team and send it to database
 
                     AddUserToTeam.super.setVisible(false);
@@ -87,5 +92,13 @@ public class AddUserToTeam extends JFrame{
         super.setResizable(false);
         super.setVisible(true);
 
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        AddUserToTeam.user = user;
     }
 }

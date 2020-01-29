@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Project;
 import model.User;
 
@@ -17,18 +18,27 @@ import java.util.PrimitiveIterator;
 /** @noinspection ALL*/
 public class ProjectsView extends JFrame {
 
-    private User user;
+    private static User user;
     private  JLabel username = new JLabel("username");
     private static ArrayList<Project> projects = new ArrayList<>();
+    private PmJList<Project> projectPmJList;
 
-    public ProjectsView(){
+    public ProjectsView(User user){
         super("Project View");
+        this.user = user;
+        Controller controller = new Controller();
+        try {System.out.println(user);
+            controller.fetchProjectsFromDb(this.user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         createGraphic();
     }
 
     private void createGraphic() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
         Color color = new Color(105,105,105);
+        ProjectsView projectsView = this;
 
         // frame
         Dimension frameSize = new Dimension(500, 500);
@@ -62,10 +72,11 @@ public class ProjectsView extends JFrame {
 
 
         // JList
+
         Project[] p = new Project[projects.size()];
         projects.toArray(p);
         Dimension listDimension = new Dimension(frameSize.width, frameSize.height);
-        PmJList<Project> projectPmJList = new PmJList<>("Project",
+        projectPmJList = new PmJList<>("Project",
                 p);
         projectPmJList.setPreferredSize(listDimension);
 
@@ -96,8 +107,7 @@ public class ProjectsView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new ManagementView(new User("user",
-                        "2222", "eamil", "445"));
+                new ManagementView(user, projectPmJList.getList()[projectPmJList.getSelectedIndex()]);
                 ProjectsView.super.setVisible(false);
             }
         });
@@ -105,7 +115,7 @@ public class ProjectsView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                CreateProject vp = new CreateProject();
+                CreateProject vp = new CreateProject(projectsView, user);
 
             }
         });
@@ -157,8 +167,19 @@ public class ProjectsView extends JFrame {
     }
 
 
-    public static void updateProjectView(){
+    public void updateProjectView(){
         // TODO: 1/27/2020 get list of project from database
+        Controller controller = new Controller();
+        try {
+            controller.fetchProjectsFromDb(ProjectsView.user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Project[] p = new Project[projects.size()];
+        projects.toArray(p);
+        projectPmJList.setList(p);
+        projectPmJList.validate();
+        super.validate();
     }
 
     public User getUser() {

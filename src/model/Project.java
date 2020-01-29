@@ -97,4 +97,12 @@ public class Project {
     public int hashCode() {
         return Objects.hash(id, manager);
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

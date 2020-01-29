@@ -11,13 +11,11 @@ public class TeamMember extends User {
     public TeamMember(){}
 
     public TeamMember(User user) {
-        super(user.getUsername(),
+        super(user.getId(), user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-//        this.teamMemberId = baseTeamMemberId;
-//        baseTeamMemberId++;
     }
 
     // TODO: 1/25/2020 erase

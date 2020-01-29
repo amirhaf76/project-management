@@ -13,6 +13,7 @@ public class Task {
     private int percentage = 0;
 
     private String name;
+    private String description;
     private State state = State.TO_DO;
 
     private ArrayList<TaskComment> comments = new ArrayList<>();
@@ -106,6 +107,22 @@ public class Task {
 
     public static void setBaseTaskId(int baseTaskId) {
         Task.baseTaskId = baseTaskId;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

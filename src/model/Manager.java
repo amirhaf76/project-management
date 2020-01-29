@@ -7,16 +7,15 @@ public class Manager extends User {
     private static int baseManagerId = 1;
 
     private int managerId;
+    public Manager() {}
 
     public Manager(User user) {
-        super(user.getUsername(),
+        super(user.getId(), user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getPhoneNumber()
         );
-//        this.managerId = baseManagerId;
-//
-//        baseManagerId++;
+
     }
 
     public int getManagerId() {

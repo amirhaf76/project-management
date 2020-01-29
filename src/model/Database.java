@@ -211,7 +211,7 @@ public class Database {
      * @throws Exception
      */
     public void insertIntoTask(String task_name, String task_description, String startTime, String endTime
-            , int assignedTeamMember_id, int assignedTeam_id) throws Exception {
+            , Integer assignedTeamMember_id, Integer assignedTeam_id) throws Exception {
         //open connection
         connectToDatabase();
         preparedStatement = connect.prepareStatement("insert into  Task values (default, ?, ? ,? ,? ,? ,? , DEFAULT)");
@@ -398,7 +398,6 @@ public class Database {
     }
 
 
-
     //TODO: selectUserFromUsername
     /*public User selectUserFromUsername(String username) throws Exception {
         //if user exist and pass is correct res -> TRUE else -> FALSE
@@ -497,7 +496,6 @@ public class Database {
         close();
         return projects;
     }
-
 
 
     /**
@@ -758,7 +756,7 @@ public class Database {
             String phoneNumber = rs.getString(5);
             String bio = rs.getString(6);
 
-            users.add(new TeamMember(new User(username, password, email, phoneNumber)));
+            users.add(new TeamMember(new User(user_id, username, password, email, phoneNumber)));
 
             //Display values
             System.out.print(", user_id: " + user_id);
@@ -828,7 +826,7 @@ public class Database {
 
         ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        Manager manager= new Manager(new User());
+        Manager manager = new Manager(new User());
         while (rs.next()) {
             //Retrieve by column name
             int user_id = rs.getInt(1);
@@ -837,7 +835,7 @@ public class Database {
             String email = rs.getString(4);
             String phoneNumber = rs.getString(5);
             String bio = rs.getString(6);
-            manager = new Manager(new User(username, password, email, phoneNumber));
+            manager = new Manager(new User(user_id, username, password, email, phoneNumber));
             //Display values
             System.out.print(", user_id: " + user_id);
             System.out.print(", username: " + username);
@@ -853,6 +851,7 @@ public class Database {
 
     /**
      * check task dependencyand return a boolean
+     *
      * @param task_id
      * @return
      * @throws Exception
@@ -865,23 +864,25 @@ public class Database {
         String sql = "SELECT * FROM TaskDependency taskD , Task task WHERE taskD.reference = task.task_id and" +
                 " task.percentage <> 100";
 
-        ResultSet rs = statement.executeQuery( sql);
+        ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
-        while(rs.next()){
+        while (rs.next()) {
             //Retrieve by column name
-            int task  = rs.getInt(1);
-            if(task == task_id)
+            int task = rs.getInt(1);
+            if (task == task_id)
                 res = true;
         }
         //close database connection
         close();
         return res;
     }
-    public User  selectUser(String usnaeme) throws Exception {
+
+    public User selectUser(String usnaeme) throws Exception {
         connectToDatabase();
 
         //select all the comments of a task with id =  task_id
-        String sql = "SELECT u.user_id ,u.username ,u.password ,u.email ,u.phoneNumber ,u.bio FROM User u WHERE u.username =" + usnaeme;
+        String sql = "SELECT * FROM User WHERE username = '" + usnaeme+"'";
+
 
         ResultSet rs = statement.executeQuery(sql);
         //Extract data from result set
@@ -895,7 +896,7 @@ public class Database {
             String phoneNumber = rs.getString(5);
             String bio = rs.getString(6);
 
-            user = new User(username,password,email,phoneNumber);
+            user = new User(user_id, username, password, email, phoneNumber);
             //Display values
             System.out.print(", user_id: " + user_id);
             System.out.print(", username: " + username);

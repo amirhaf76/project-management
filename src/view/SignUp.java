@@ -107,7 +107,7 @@ public class SignUp extends JFrame{
                         "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    // TODO: 1/25/2020 create user and send it to database
+                    // TODO: 1/25/2020 create user and send it to database ok
                     try {
                         controller.sendUserDataToDb(usernameField.getText(),
                                 passwordField.getText(),

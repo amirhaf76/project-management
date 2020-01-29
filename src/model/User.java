@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class User {
 
+    private int id;
     private String username;
     private String password;
     private String email;
@@ -15,7 +16,8 @@ public class User {
 
     public User(){}
 
-    public User(String username, String password, String email, String phoneNumber) {
+    public User(int id, String username, String password, String email, String phoneNumber) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -69,6 +71,14 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

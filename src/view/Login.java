@@ -80,12 +80,12 @@ public class Login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Controller contoller = new Controller();
-                // TODO: 1/25/2020 check user from database
+                // TODO: 1/25/2020 check user from database ok
                 try {
                     if (contoller.checkUserValidation(usernameField.getText(), passwordField.getText())) {
                         Login.super.setVisible(false);
-                        ProjectsView projectsView = new ProjectsView();
                         contoller.fetchUserFromDb(usernameField.getText());
+                        ProjectsView projectsView = new ProjectsView(user);
                         projectsView.setUser(user);
                         projectsView.setText();
                     }

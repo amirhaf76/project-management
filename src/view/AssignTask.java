@@ -4,6 +4,7 @@ import controller.Controller;
 import model.Task;
 import model.Team;
 import model.TeamMember;
+import model.User;
 
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 public class AssignTask extends JFrame {
 
     private JTextField username = new JTextField(16);
+    private static User user;
 
     public AssignTask(Task task) {
         super("Assign a task");
@@ -66,7 +68,12 @@ public class AssignTask extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!AssignTask.this.username.getText().equals("")) {
                     Controller controller = new Controller();
-//                    controller.sendTaskAssignmentDataToDb();
+                    try {
+                        controller.fetchUserFromDbAssignTask(AssignTask.this.username.getText());
+                        controller.sendTaskAssignmentDataToDb(task.getId(),  user.getId());
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     // TODO: 1/25/2020 add teammember to the task in database
                     AssignTask.super.setVisible(false);
                 }
@@ -85,5 +92,13 @@ public class AssignTask extends JFrame {
         super.setResizable(false);
         super.setVisible(true);
 
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        AssignTask.user = user;
     }
 }

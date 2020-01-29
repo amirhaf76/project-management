@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import model.User;
 import org.jfree.data.category.CategoryRangeInfo;
 
 import javax.swing.*;
@@ -11,14 +12,16 @@ import java.awt.event.ActionListener;
 public class CreateProject extends JFrame{
     private JTextField projectName = new JTextField(16);
     private ProjectsView projectsView;
+    private static User user;
 
-    public CreateProject(ProjectsView projectsView) {
-        this();
+    public CreateProject(ProjectsView projectsView, User user) {
+        this(user);
         this.projectsView = projectsView;
     }
 
-    public CreateProject() {
+    public CreateProject(User user) {
         super("Create Project");
+        CreateProject.user = user;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -68,15 +71,18 @@ public class CreateProject extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if (!projectName.getText().equals("")) {
 
-                    // TODO: 1/27/2020 create Project and send it to database
-                    Controller controller = new Controller();
+                    // TODO: 1/27/2020 create Project and send it to database ok
                     try {
-                        controller.sendProjectDataToDb(projectName.getText(), "", 1);
-                        // TODO: 1/28/2020 doit
+
+                        Controller controller = new Controller();
+                        System.out.println("jf");
+                        controller.fetchUserFromDbCreateProject(CreateProject.user.getUsername());
+                        controller.sendProjectDataToDb(projectName.getText(), "", user.getId() );
+                        System.out.println("jk");
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                    ProjectsView.updateProjectView();
+                    projectsView.updateProjectView();
                     CreateProject.super.setVisible(false);
                 }
                 else {
@@ -104,11 +110,11 @@ public class CreateProject extends JFrame{
         this.projectsView = projectsView;
     }
 
-    public JTextField getProjectName() {
-        return projectName;
+    public static User getUser() {
+        return user;
     }
 
-    public void setProjectName(JTextField projectName) {
-        this.projectName = projectName;
+    public static void setUser(User user) {
+        CreateProject.user = user;
     }
 }

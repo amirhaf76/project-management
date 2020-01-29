@@ -1,10 +1,8 @@
 package view;
 
 
-import model.Task;
-import model.Team;
-import model.TeamMember;
-import model.User;
+import controller.Controller;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -24,15 +22,22 @@ public class ManagementView extends JFrame{
     private static ArrayList<Team> teams;
     private static ArrayList<TeamMember> teamMembers;
     private GanttChart ganttChart;
+    private Project project;
 
 
-    public ManagementView(User user) {
+
+    public ManagementView(User user, Project project) {
         super("Project Management");
         this.user = user;
-        createGUI();
+        this.project = project;
+        try {
+            createGUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void createGUI() {
+    private void createGUI() throws Exception {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize().getSize();
 
         ganttChart = new GanttChart( new ArrayList<>());
@@ -69,14 +74,20 @@ public class ManagementView extends JFrame{
         closeProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProjectsView();
+                new ProjectsView(user);
                 ManagementView.super.setVisible(false);
                 ganttChart.setVisible(false);
             }
         });
 
         // PmJList
-        // TODO: 1/27/2020 get all teams of Project from database
+        // TODO: 1/27/2020 get all teams of Project from database ok
+        Controller controller = new Controller();
+        try {
+            controller.fetchProjectsFromDb(user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Task[] tasks = new Task[2];
         Team[] teams =new Team[2];
         TeamMember[] teamMembers = new TeamMember[5];
@@ -99,15 +110,21 @@ public class ManagementView extends JFrame{
         teamMemberJList.setPreferredSize(listDimension);
         teamMemberJList.setSize(listDimension);
 
-        // TODO: 1/28/2020 if the user is manager
-        todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
-        todo.addAssignTaskToPopUp();doing.addAssignTaskToPopUp();done.addAssignTaskToPopUp();
-        teamJList.addTeamToPopUp();
-        teamMemberJList.addAddTeamMemberToPopUp();
+        // TODO: 1/28/2020 if the user is manager ok
+        if (controller.checkUserIsmanager(project.getId(), user.getId()) ){
+            todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
+            todo.addAssignTaskToPopUp();doing.addAssignTaskToPopUp();done.addAssignTaskToPopUp();
+            teamJList.addTeamToPopUp();
+            teamMemberJList.addAddTeamMemberToPopUp();
+            todo.creatTask();
+        }
+        else {
 
-        // TODO: 1/28/2020 else
-        todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
-        todo.addSetPercentageToPopUp();doing.addSetPercentageToPopUp();done.addSetPercentageToPopUp();
+            todo.addTaskPropertyToPopUp();doing.addTaskPropertyToPopUp();done.addTaskPropertyToPopUp();
+            todo.addSetPercentageToPopUp();doing.addSetPercentageToPopUp();done.addSetPercentageToPopUp();
+        }
+
+        // TODO: 1/28/2020 else ok
 
 
 
@@ -198,14 +215,28 @@ public class ManagementView extends JFrame{
     }
 
     private void updateTasks() {
-        // TODO: 1/28/2020 get team members from database
-        // TODO: 1/28/2020 get tasks from database
+        Controller controller = new Controller();
+        try {
+            controller.fetchTeamMembersFromDb(project.getId());
+            controller.fetchTasksFromDb(project.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.validate();
+        // TODO: 1/28/2020 get team members from database ok
+        // TODO: 1/28/2020 get tasks from database ok
 
     }
 
     private void updateTeamMemberAndTasks() {
-        // TODO: 1/28/2020 get tasks from database
-
+        // TODO: 1/28/2020 get tasks from database ok
+        Controller controller = new Controller();
+        try {
+            controller.fetchTasksFromDb(project.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.validate();
     }
 
     private JScrollPane createJScrollPane(Component component, Dimension dimension, String name) {
@@ -240,9 +271,15 @@ public class ManagementView extends JFrame{
     }
 
 
-    public void updateManagementView(){
-        // TODO: 1/28/2020 get all tasks of project from database
-//        ganttChart.updateGantt();
+    public void updateManagementView() {
+        // TODO: 1/28/2020 get all tasks of project from database ok
+        Controller controller = new Controller();
+        try {
+            controller.fetchTasksFromDb(project.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ganttChart.updateGantt(tasks);
     }
 
     public User getUser() {

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Task;
 import view.com.toedter.calendar.JDateChooser;
 
@@ -10,7 +11,15 @@ import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.Time;
+import java.text.Format;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 
 
 /** @noinspection ALL*/
@@ -79,8 +88,26 @@ public class CreateTask extends JFrame{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/27/2020 create task and send it to database
-                // TODO: 1/27/2020 check information
+                // TODO: 1/27/2020 create task and send it to database ok
+                System.out.println(startDate.getDate());
+                DateTimeFormatter formater1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                System.out.println(startDate.getDate().getYear());
+                LocalDateTime first = LocalDateTime.ofInstant(startDate.getDate().toInstant(), ZoneId.systemDefault());
+                LocalDateTime second = LocalDateTime.ofInstant(startDate.getDate().toInstant(), ZoneId.systemDefault());
+
+                Controller controller = new Controller();
+                try {
+                    controller.sendTaskDataToDb(
+                            title.getText(),
+                            "",
+                            first.format(formater1),
+                            second.format(formater1),
+                            1,
+                            11
+                    );
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -180,10 +207,12 @@ class TimeGetter extends JPanel {
         super.validate();
     }
 
-    public Time getTime() {
-        long time = Integer.parseInt(hour.getText()) * 3600 * 1000;
-        time += Integer.parseInt(minutes.getText()) * 60 * 1000;
-        return new Time(time);
+    public int getHour() {
+        return Integer.parseInt(hour.getText());
+    }
+
+    public int getMinutes() {
+        return Integer.parseInt(minutes.getText());
     }
 
 }

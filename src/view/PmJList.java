@@ -39,24 +39,36 @@ public class PmJList<T> extends JList<T> {
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/27/2020 show property of task
+                // TODO: 1/27/2020 show property of task ok
                 new TaskView((Task)PmJList.super.getSelectedValuesList().get(PmJList.super.getSelectedIndex()));
             }
         });
         popupMenu.add(addTeam);
     }
 
-    void addTeamMemberPropertyToPopUp() {
-        JMenuItem addTeam = new JMenuItem("Property");
+    void creatTask() {
+        JMenuItem addTeam = new JMenuItem("Add task");
         addTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: 1/27/2020 show property of teamMember
 
+                 CreateTask ct = new CreateTask();
             }
         });
         popupMenu.add(addTeam);
     }
+
+//    void addTeamMemberPropertyToPopUp() {
+//        JMenuItem addTeam = new JMenuItem("Property");
+//        addTeam.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//
+//            }
+//        });
+//        popupMenu.add(addTeam);
+//    }
 
     void addSetPercentageToPopUp() {
         JMenuItem addTeam = new JMenuItem("Set Percentage");

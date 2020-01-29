@@ -1,18 +1,18 @@
 package controller;
 
 import model.Database;
-import view.Login;
-import view.ManagementView;
-import view.ProjectsView;
+import model.User;
+import view.*;
 
 public class Controller {
     Database database;
 
-    public void Controller() {
+    public Controller() {
         database = new Database();
     }
 
     public void sendUserDataToDb(String username, String password, String email, String phoneNumber) throws Exception {
+
         database.insertIntoUser(username, password, email, phoneNumber);
     }
 
@@ -25,7 +25,7 @@ public class Controller {
     }
 
     public void sendTaskDataToDb(String task_name, String task_description, String startTime, String endTime
-            , int assignedTeamMember_id, int assignedTeam_id) throws Exception {
+            , Integer assignedTeamMember_id, Integer assignedTeam_id) throws Exception {
         database.insertIntoTask(task_name, task_description, startTime, endTime, assignedTeamMember_id, assignedTeam_id);
     }
 
@@ -57,9 +57,27 @@ public class Controller {
         Login.setUser(database.selectUser(username));
     }
 
+    public void fetchUserFromDbAddUserToTeam(String username) throws Exception {
+        AddUserToTeam.setUser(database.selectUser(username));
+    }
+
+    public void fetchUserFromDbAssignTask(String username) throws Exception {
+        AssignTask.setUser(database.selectUser(username));
+    }
+
+    public void fetchUserFromDbCreateProject(String username) throws Exception {
+        System.out.println("hhhh");
+        User user = database.selectUser(username);
+        System.out.println("j");
+        CreateProject.setUser(user);
+    }
+
     public boolean checkUserValidation(String username, String password) throws Exception {
         return database.checkUserValidation(username, password);
     }
 
+    public boolean checkUserIsmanager(int project_id, int user_id) throws Exception {
+        return database.userIsManager(project_id, user_id);
+    }
 
 }
